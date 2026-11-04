@@ -1,0 +1,751 @@
+{
+  "_LEIA-ME": "Preencha os dados de cada curso (chave = nome da aba/arquivo). Campos vazios aparecem como 'A preencher' nos slides. 'imagem' = caminho de um arquivo PNG/JPG relativo a esta pasta. Cursos novos são adicionados em branco automaticamente ao rodar o script.",
+  "CPROE_1": {
+    "nome": "Curso de Preparação de Oficiais de Esquadrão Aéreo - CPROE",
+    "sigla": "CPROE",
+    "edicao": "2026.1",
+    "finalidade": "O CPROE é um curso de pós-formação em nível de especialização, destinado ao Quadro de Oficiais Aviadores (QOAV), que visa qualificar para o exercício de cargos e funções exercidas por Oficiais de Esquadrão Aéreo, que requerem capacitação e habilitação específicas.",
+    "objetivos_intro": "Proporcionar aos instruendos experiências de aprendizagem que os habilitem a:",
+    "objetivos": [
+      "I - conhecer a organização, finalidades e processos das Bases Aéreas e Unidades Aéreas;",
+      "II - compreender o emprego da expressão militar do Poder Nacional, com ênfase no Poder Aeroespacial, de acordo com os preceitos doutrinários vigentes;",
+      "III - compreender os conceitos e fundamentos relativos ao planejamento e à condução de operações aeroespaciais; e",
+      "IV - analisar conflitos bélicos internacionais à luz da Doutrina Militar de Defesa e da Doutrina Básica da Força Aérea Brasileira."
+    ],
+    "perfil_titulo": "Perfil Profissional ou Perfil de Egresso",
+    "perfil_intro": "Ao final do CPROE, o aluno deverá ser capaz de:",
+    "perfil": [
+      "I - interpretar os princípios, conceitos e doutrina que orientam o preparo e emprego da Força Aérea Brasileira dentro de um contexto nacional e internacional;",
+      "II - interpretar os conceitos e fundamentos básicos de planejamento e emprego de armamento aéreo;",
+      "III - interpretar os conceitos e fundamentos aplicados na Guerra eletrônica que afetam os equipamentos das aeronaves;",
+      "IV - interpretar os conceitos básicos sobre o emprego do sistema data link e comunicações seguras;",
+      "V - empregar os conceitos e fundamentos de inteligência operacional em prol da efetividade das operações aeroespaciais;",
+      "VI - compreender as atribuições inerentes aos postos de oficial subalterno e intermediário das Bases e Esquadrões Aéreos; e",
+      "VII - estabelecer ações de gestão e coordenação de fluxos administrativos afetos às Subseções, Seções, Divisões e outras unidades administrativas sobre as quais tenha responsabilidade."
+    ],
+    "coordenacao": {
+      "Coordenação Técnica": "Cap Av Lobo",
+      "Ativação": "Conforme TCA 37-4 “Cursos e Estágios”",
+      "Matrícula": "BCA n° 106, de 09 de junho de 2025",
+      "Deslocamentos": "Os alunos e instrutores deslocaram-se para Parnamirim / RN.",
+      "Despesas Financeiras com Instrutores": "R$ 33.632,49 (Trinta e três mil seiscentos e trinta e dois reais e quarenta e nove centavos)."
+    },
+    "notas": [
+      {
+        "titulo": "Desempenho dos Discentes",
+        "imagem": "imagens/cproe_desempenho.png"
+      },
+      {
+        "titulo": "Frequência de Notas da Turma",
+        "imagem": "imagens/cproe_frequencia.png"
+      },
+      {
+        "titulo": "Histograma do Desempenho da Turma em relação aos 3 últimos anos",
+        "imagem": "imagens/cproe_histograma.png"
+      }
+    ],
+    "acoes": [],
+    "parecer": ""
+  },
+  "CDSPA_1": {
+    "nome": "Curso Doutrinário de Segurança e Proteção de Autoridades (CDSPA)",
+    "sigla": "CDSPA",
+    "edicao": "2026.1",
+    "finalidade": "",
+    "objetivos_intro": "Proporcionar aos alunos condições de aprendizagem que os capacitem a:",
+    "objetivos": [
+      "a) identificar as principais características de um agente de segurança de autoridades;",
+      "b) compreender o planejamento da atividade operacional de segurança e proteção de autoridades;",
+      "c) identificar as atividades relacionadas à segurança e proteção de autoridades;",
+      "d) identificar as funções de cada um dos agentes de segurança de autoridades; e",
+      "e) valorizar as funções de cada um dos agentes de segurança de autoridades."
+    ],
+    "perfil_titulo": "Perfil de Egresso",
+    "perfil_intro": "Ao final do CDSPA, o aluno deverá ser capaz de:",
+    "perfil": [
+      "a) compreender a responsabilidade de um agente de segurança e proteção de autoridades;",
+      "b) identificar as normas de cerimonial e etiqueta;",
+      "c) identificar as regras de segurança no manuseio de armas e explosivos;",
+      "d) identificar as armas necessárias à atividade de proteção de autoridades;",
+      "e) identificar técnicas de direção ofensiva e defensiva;",
+      "f) compreender os procedimentos adequados de escolta a pé e motorizada;",
+      "g) identificar os processos de modificação da aparência através do uso do disfarce;",
+      "h) compreender as técnicas de observação, memorização e descrição na atividade de proteção de autoridades;",
+      "i) compreender as técnicas de primeiros socorros;",
+      "j) identificar as técnicas de segurança em atividades aquáticas no contexto da proteção de autoridades;",
+      "k) identificar medidas de defesa em ações de emboscada;",
+      "l) identificar medidas e procedimentos contra atentados;",
+      "m) identificar artefatos explosivos e seus efeitos;",
+      "n) identificar medidas de segurança adotadas nas aparições em público;",
+      "o) identificar medidas de defesa contra utilização de equipamentos de escuta;",
+      "p) identificar um plano de operações de proteção de autoridade;",
+      "q) identificar os meios de contraincêndio; e",
+      "r) valorizar o trabalho em equipe."
+    ],
+    "coordenacao": {
+      "Coordenação Técnica": "1T QOInf Willian Rodrigues Do Vale"
+    },
+    "acoes": [],
+    "parecer": ""
+  },
+  "CATT_1": {
+    "nome": "",
+    "sigla": "",
+    "edicao": "",
+    "finalidade": "",
+    "objetivos_intro": "",
+    "objetivos": [],
+    "perfil_titulo": "Perfil Profissional ou Perfil de Egresso",
+    "perfil_intro": "",
+    "perfil": [],
+    "coordenacao": {
+      "Coordenação Técnica": ""
+    },
+    "notas": [
+      {
+        "titulo": "Desempenho dos Discentes",
+        "imagem": ""
+      },
+      {
+        "titulo": "Frequência de Notas da Turma",
+        "imagem": ""
+      },
+      {
+        "titulo": "Histograma do Desempenho da Turma em relação aos 3 últimos anos",
+        "imagem": ""
+      }
+    ],
+    "acoes": [],
+    "parecer": ""
+  },
+  "CPMAC_1": {
+    "nome": "",
+    "sigla": "",
+    "edicao": "",
+    "finalidade": "",
+    "objetivos_intro": "",
+    "objetivos": [],
+    "perfil_titulo": "Perfil Profissional ou Perfil de Egresso",
+    "perfil_intro": "",
+    "perfil": [],
+    "coordenacao": {
+      "Coordenação Técnica": ""
+    },
+    "notas": [
+      {
+        "titulo": "Desempenho dos Discentes",
+        "imagem": ""
+      },
+      {
+        "titulo": "Frequência de Notas da Turma",
+        "imagem": ""
+      },
+      {
+        "titulo": "Histograma do Desempenho da Turma em relação aos 3 últimos anos",
+        "imagem": ""
+      }
+    ],
+    "acoes": [],
+    "parecer": ""
+  },
+  "CCE_1": {
+    "nome": "",
+    "sigla": "",
+    "edicao": "",
+    "finalidade": "",
+    "objetivos_intro": "",
+    "objetivos": [],
+    "perfil_titulo": "Perfil Profissional ou Perfil de Egresso",
+    "perfil_intro": "",
+    "perfil": [],
+    "coordenacao": {
+      "Coordenação Técnica": ""
+    },
+    "notas": [
+      {
+        "titulo": "Desempenho dos Discentes",
+        "imagem": ""
+      },
+      {
+        "titulo": "Frequência de Notas da Turma",
+        "imagem": ""
+      },
+      {
+        "titulo": "Histograma do Desempenho da Turma em relação aos 3 últimos anos",
+        "imagem": ""
+      }
+    ],
+    "acoes": [],
+    "parecer": ""
+  },
+  "CSAA_1": {
+    "nome": "",
+    "sigla": "",
+    "edicao": "",
+    "finalidade": "",
+    "objetivos_intro": "",
+    "objetivos": [],
+    "perfil_titulo": "Perfil Profissional ou Perfil de Egresso",
+    "perfil_intro": "",
+    "perfil": [],
+    "coordenacao": {
+      "Coordenação Técnica": ""
+    },
+    "notas": [
+      {
+        "titulo": "Desempenho dos Discentes",
+        "imagem": ""
+      },
+      {
+        "titulo": "Frequência de Notas da Turma",
+        "imagem": ""
+      },
+      {
+        "titulo": "Histograma do Desempenho da Turma em relação aos 3 últimos anos",
+        "imagem": ""
+      }
+    ],
+    "acoes": [],
+    "parecer": ""
+  },
+  "CPEAAE-B_1": {
+    "nome": "",
+    "sigla": "",
+    "edicao": "",
+    "finalidade": "",
+    "objetivos_intro": "",
+    "objetivos": [],
+    "perfil_titulo": "Perfil Profissional ou Perfil de Egresso",
+    "perfil_intro": "",
+    "perfil": [],
+    "coordenacao": {
+      "Coordenação Técnica": ""
+    },
+    "notas": [
+      {
+        "titulo": "Desempenho dos Discentes",
+        "imagem": ""
+      },
+      {
+        "titulo": "Frequência de Notas da Turma",
+        "imagem": ""
+      },
+      {
+        "titulo": "Histograma do Desempenho da Turma em relação aos 3 últimos anos",
+        "imagem": ""
+      }
+    ],
+    "acoes": [],
+    "parecer": ""
+  },
+  "CBIV_1": {
+    "nome": "",
+    "sigla": "",
+    "edicao": "",
+    "finalidade": "",
+    "objetivos_intro": "",
+    "objetivos": [],
+    "perfil_titulo": "Perfil Profissional ou Perfil de Egresso",
+    "perfil_intro": "",
+    "perfil": [],
+    "coordenacao": {
+      "Coordenação Técnica": ""
+    },
+    "notas": [
+      {
+        "titulo": "Desempenho dos Discentes",
+        "imagem": ""
+      },
+      {
+        "titulo": "Frequência de Notas da Turma",
+        "imagem": ""
+      },
+      {
+        "titulo": "Histograma do Desempenho da Turma em relação aos 3 últimos anos",
+        "imagem": ""
+      }
+    ],
+    "acoes": [],
+    "parecer": ""
+  },
+  "CBIC_1": {
+    "nome": "",
+    "sigla": "",
+    "edicao": "",
+    "finalidade": "",
+    "objetivos_intro": "",
+    "objetivos": [],
+    "perfil_titulo": "Perfil Profissional ou Perfil de Egresso",
+    "perfil_intro": "",
+    "perfil": [],
+    "coordenacao": {
+      "Coordenação Técnica": ""
+    },
+    "notas": [
+      {
+        "titulo": "Desempenho dos Discentes",
+        "imagem": ""
+      },
+      {
+        "titulo": "Frequência de Notas da Turma",
+        "imagem": ""
+      },
+      {
+        "titulo": "Histograma do Desempenho da Turma em relação aos 3 últimos anos",
+        "imagem": ""
+      }
+    ],
+    "acoes": [],
+    "parecer": ""
+  },
+  "CTAI_1": {
+    "nome": "",
+    "sigla": "",
+    "edicao": "",
+    "finalidade": "",
+    "objetivos_intro": "",
+    "objetivos": [],
+    "perfil_titulo": "Perfil Profissional ou Perfil de Egresso",
+    "perfil_intro": "",
+    "perfil": [],
+    "coordenacao": {
+      "Coordenação Técnica": ""
+    },
+    "notas": [
+      {
+        "titulo": "Desempenho dos Discentes",
+        "imagem": ""
+      },
+      {
+        "titulo": "Frequência de Notas da Turma",
+        "imagem": ""
+      },
+      {
+        "titulo": "Histograma do Desempenho da Turma em relação aos 3 últimos anos",
+        "imagem": ""
+      }
+    ],
+    "acoes": [],
+    "parecer": ""
+  },
+  "CBEAT-R_1": {
+    "nome": "",
+    "sigla": "",
+    "edicao": "",
+    "finalidade": "",
+    "objetivos_intro": "",
+    "objetivos": [],
+    "perfil_titulo": "Perfil Profissional ou Perfil de Egresso",
+    "perfil_intro": "",
+    "perfil": [],
+    "coordenacao": {
+      "Coordenação Técnica": ""
+    },
+    "notas": [
+      {
+        "titulo": "Desempenho dos Discentes",
+        "imagem": ""
+      },
+      {
+        "titulo": "Frequência de Notas da Turma",
+        "imagem": ""
+      },
+      {
+        "titulo": "Histograma do Desempenho da Turma em relação aos 3 últimos anos",
+        "imagem": ""
+      }
+    ],
+    "acoes": [],
+    "parecer": ""
+  },
+  "CBEAT_1": {
+    "nome": "",
+    "sigla": "",
+    "edicao": "",
+    "finalidade": "",
+    "objetivos_intro": "",
+    "objetivos": [],
+    "perfil_titulo": "Perfil Profissional ou Perfil de Egresso",
+    "perfil_intro": "",
+    "perfil": [],
+    "coordenacao": {
+      "Coordenação Técnica": ""
+    },
+    "notas": [
+      {
+        "titulo": "Desempenho dos Discentes",
+        "imagem": ""
+      },
+      {
+        "titulo": "Frequência de Notas da Turma",
+        "imagem": ""
+      },
+      {
+        "titulo": "Histograma do Desempenho da Turma em relação aos 3 últimos anos",
+        "imagem": ""
+      }
+    ],
+    "acoes": [],
+    "parecer": ""
+  },
+  "CBBS_1": {
+    "nome": "",
+    "sigla": "",
+    "edicao": "",
+    "finalidade": "",
+    "objetivos_intro": "",
+    "objetivos": [],
+    "perfil_titulo": "Perfil Profissional ou Perfil de Egresso",
+    "perfil_intro": "",
+    "perfil": [],
+    "coordenacao": {
+      "Coordenação Técnica": ""
+    },
+    "notas": [
+      {
+        "titulo": "Desempenho dos Discentes",
+        "imagem": ""
+      },
+      {
+        "titulo": "Frequência de Notas da Turma",
+        "imagem": ""
+      },
+      {
+        "titulo": "Histograma do Desempenho da Turma em relação aos 3 últimos anos",
+        "imagem": ""
+      }
+    ],
+    "acoes": [],
+    "parecer": ""
+  },
+  "CBSR_1": {
+    "nome": "",
+    "sigla": "",
+    "edicao": "",
+    "finalidade": "",
+    "objetivos_intro": "",
+    "objetivos": [],
+    "perfil_titulo": "Perfil Profissional ou Perfil de Egresso",
+    "perfil_intro": "",
+    "perfil": [],
+    "coordenacao": {
+      "Coordenação Técnica": ""
+    },
+    "notas": [
+      {
+        "titulo": "Desempenho dos Discentes",
+        "imagem": ""
+      },
+      {
+        "titulo": "Frequência de Notas da Turma",
+        "imagem": ""
+      },
+      {
+        "titulo": "Histograma do Desempenho da Turma em relação aos 3 últimos anos",
+        "imagem": ""
+      }
+    ],
+    "acoes": [],
+    "parecer": ""
+  },
+  "CDDAE_1": {
+    "nome": "",
+    "sigla": "",
+    "edicao": "",
+    "finalidade": "",
+    "objetivos_intro": "",
+    "objetivos": [],
+    "perfil_titulo": "Perfil Profissional ou Perfil de Egresso",
+    "perfil_intro": "",
+    "perfil": [],
+    "coordenacao": {
+      "Coordenação Técnica": ""
+    },
+    "notas": [
+      {
+        "titulo": "Desempenho dos Discentes",
+        "imagem": ""
+      },
+      {
+        "titulo": "Frequência de Notas da Turma",
+        "imagem": ""
+      },
+      {
+        "titulo": "Histograma do Desempenho da Turma em relação aos 3 últimos anos",
+        "imagem": ""
+      }
+    ],
+    "acoes": [],
+    "parecer": ""
+  },
+  "CDPIOT_1": {
+    "nome": "",
+    "sigla": "",
+    "edicao": "",
+    "finalidade": "",
+    "objetivos_intro": "",
+    "objetivos": [],
+    "perfil_titulo": "Perfil Profissional ou Perfil de Egresso",
+    "perfil_intro": "",
+    "perfil": [],
+    "coordenacao": {
+      "Coordenação Técnica": ""
+    },
+    "notas": [
+      {
+        "titulo": "Desempenho dos Discentes",
+        "imagem": ""
+      },
+      {
+        "titulo": "Frequência de Notas da Turma",
+        "imagem": ""
+      },
+      {
+        "titulo": "Histograma do Desempenho da Turma em relação aos 3 últimos anos",
+        "imagem": ""
+      }
+    ],
+    "acoes": [],
+    "parecer": ""
+  },
+  "CCGAAT_1": {
+    "nome": "",
+    "sigla": "",
+    "edicao": "",
+    "finalidade": "",
+    "objetivos_intro": "",
+    "objetivos": [],
+    "perfil_titulo": "Perfil Profissional ou Perfil de Egresso",
+    "perfil_intro": "",
+    "perfil": [],
+    "coordenacao": {
+      "Coordenação Técnica": ""
+    },
+    "notas": [
+      {
+        "titulo": "Desempenho dos Discentes",
+        "imagem": ""
+      },
+      {
+        "titulo": "Frequência de Notas da Turma",
+        "imagem": ""
+      },
+      {
+        "titulo": "Histograma do Desempenho da Turma em relação aos 3 últimos anos",
+        "imagem": ""
+      }
+    ],
+    "acoes": [],
+    "parecer": ""
+  },
+  "CDSPA_2": {
+    "nome": "",
+    "sigla": "",
+    "edicao": "",
+    "finalidade": "",
+    "objetivos_intro": "",
+    "objetivos": [],
+    "perfil_titulo": "Perfil Profissional ou Perfil de Egresso",
+    "perfil_intro": "",
+    "perfil": [],
+    "coordenacao": {
+      "Coordenação Técnica": ""
+    },
+    "notas": [
+      {
+        "titulo": "Desempenho dos Discentes",
+        "imagem": ""
+      },
+      {
+        "titulo": "Frequência de Notas da Turma",
+        "imagem": ""
+      },
+      {
+        "titulo": "Histograma do Desempenho da Turma em relação aos 3 últimos anos",
+        "imagem": ""
+      }
+    ],
+    "acoes": [],
+    "parecer": ""
+  },
+  "CBR_1": {
+    "nome": "",
+    "sigla": "",
+    "edicao": "",
+    "finalidade": "",
+    "objetivos_intro": "",
+    "objetivos": [],
+    "perfil_titulo": "Perfil Profissional ou Perfil de Egresso",
+    "perfil_intro": "",
+    "perfil": [],
+    "coordenacao": {
+      "Coordenação Técnica": ""
+    },
+    "notas": [
+      {
+        "titulo": "Desempenho dos Discentes",
+        "imagem": ""
+      },
+      {
+        "titulo": "Frequência de Notas da Turma",
+        "imagem": ""
+      },
+      {
+        "titulo": "Histograma do Desempenho da Turma em relação aos 3 últimos anos",
+        "imagem": ""
+      }
+    ],
+    "acoes": [],
+    "parecer": ""
+  },
+  "CCBVR-DA_1": {
+    "nome": "",
+    "sigla": "",
+    "edicao": "",
+    "finalidade": "",
+    "objetivos_intro": "",
+    "objetivos": [],
+    "perfil_titulo": "Perfil Profissional ou Perfil de Egresso",
+    "perfil_intro": "",
+    "perfil": [],
+    "coordenacao": {
+      "Coordenação Técnica": ""
+    },
+    "notas": [
+      {
+        "titulo": "Desempenho dos Discentes",
+        "imagem": ""
+      },
+      {
+        "titulo": "Frequência de Notas da Turma",
+        "imagem": ""
+      },
+      {
+        "titulo": "Histograma do Desempenho da Turma em relação aos 3 últimos anos",
+        "imagem": ""
+      }
+    ],
+    "acoes": [],
+    "parecer": ""
+  },
+  "CBIV_2": {
+    "nome": "",
+    "sigla": "",
+    "edicao": "",
+    "finalidade": "",
+    "objetivos_intro": "",
+    "objetivos": [],
+    "perfil_titulo": "Perfil Profissional ou Perfil de Egresso",
+    "perfil_intro": "",
+    "perfil": [],
+    "coordenacao": {
+      "Coordenação Técnica": ""
+    },
+    "notas": [
+      {
+        "titulo": "Desempenho dos Discentes",
+        "imagem": ""
+      },
+      {
+        "titulo": "Frequência de Notas da Turma",
+        "imagem": ""
+      },
+      {
+        "titulo": "Histograma do Desempenho da Turma em relação aos 3 últimos anos",
+        "imagem": ""
+      }
+    ],
+    "acoes": [],
+    "parecer": ""
+  },
+  "CBIC_2": {
+    "nome": "",
+    "sigla": "",
+    "edicao": "",
+    "finalidade": "",
+    "objetivos_intro": "",
+    "objetivos": [],
+    "perfil_titulo": "Perfil Profissional ou Perfil de Egresso",
+    "perfil_intro": "",
+    "perfil": [],
+    "coordenacao": {
+      "Coordenação Técnica": ""
+    },
+    "notas": [
+      {
+        "titulo": "Desempenho dos Discentes",
+        "imagem": ""
+      },
+      {
+        "titulo": "Frequência de Notas da Turma",
+        "imagem": ""
+      },
+      {
+        "titulo": "Histograma do Desempenho da Turma em relação aos 3 últimos anos",
+        "imagem": ""
+      }
+    ],
+    "acoes": [],
+    "parecer": ""
+  },
+  "CDDAAE_2": {
+    "nome": "",
+    "sigla": "",
+    "edicao": "",
+    "finalidade": "",
+    "objetivos_intro": "",
+    "objetivos": [],
+    "perfil_titulo": "Perfil Profissional ou Perfil de Egresso",
+    "perfil_intro": "",
+    "perfil": [],
+    "coordenacao": {
+      "Coordenação Técnica": ""
+    },
+    "notas": [
+      {
+        "titulo": "Desempenho dos Discentes",
+        "imagem": ""
+      },
+      {
+        "titulo": "Frequência de Notas da Turma",
+        "imagem": ""
+      },
+      {
+        "titulo": "Histograma do Desempenho da Turma em relação aos 3 últimos anos",
+        "imagem": ""
+      }
+    ],
+    "acoes": [],
+    "parecer": ""
+  },
+  "CBMAC_1": {
+    "nome": "",
+    "sigla": "",
+    "edicao": "",
+    "finalidade": "",
+    "objetivos_intro": "",
+    "objetivos": [],
+    "perfil_titulo": "Perfil Profissional ou Perfil de Egresso",
+    "perfil_intro": "",
+    "perfil": [],
+    "coordenacao": {
+      "Coordenação Técnica": ""
+    },
+    "notas": [
+      {
+        "titulo": "Desempenho dos Discentes",
+        "imagem": ""
+      },
+      {
+        "titulo": "Frequência de Notas da Turma",
+        "imagem": ""
+      },
+      {
+        "titulo": "Histograma do Desempenho da Turma em relação aos 3 últimos anos",
+        "imagem": ""
+      }
+    ],
+    "acoes": [],
+    "parecer": ""
+  }
+}
