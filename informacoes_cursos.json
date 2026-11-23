@@ -1,0 +1,662 @@
+{
+  "_LEIA-ME": "Preencha os dados de cada curso (chave = nome da aba/arquivo). Campos vazios aparecem como 'A preencher' nos slides. 'imagem' = caminho de um arquivo PNG/JPG relativo a esta pasta. Cursos novos são adicionados em branco automaticamente ao rodar o script.",
+  "CPROE_1": {
+    "nome": "Curso de Preparação de Oficiais de Esquadrão Aéreo - CPROE",
+    "sigla": "CPROE",
+    "edicao": "2026",
+    "periodo_local": "NT - 12 janeiro à 18 março",
+    "coordenacao": {
+      "Coordenação Técnica": ""
+    },
+    "parecer": "",
+    "acoes": [],
+    "notas": [
+      {
+        "titulo": "Desempenho dos Discentes",
+        "imagem": "imagens/cproe_desempenho.png"
+      },
+      {
+        "titulo": "Frequência de Notas da Turma",
+        "imagem": "imagens/cproe_frequencia.png"
+      },
+      {
+        "titulo": "Histograma do Desempenho da Turma em relação aos 3 últimos anos",
+        "imagem": "imagens/cproe_histograma.png"
+      }
+    ]
+  },
+  "CATT_1": {
+    "nome": "Curso Avançado De Tática De Transporte – CATT",
+    "sigla": "CATT",
+    "edicao": "2026",
+    "periodo_local": "AN - 27 abril à 08 maio",
+    "coordenacao": {
+      "Coordenação Técnica": ""
+    },
+    "parecer": "",
+    "acoes": [],
+    "notas": [
+      {
+        "titulo": "Desempenho dos Discentes",
+        "imagem": ""
+      },
+      {
+        "titulo": "Frequência de Notas da Turma",
+        "imagem": ""
+      },
+      {
+        "titulo": "Histograma do Desempenho da Turma em relação aos 3 últimos anos",
+        "imagem": ""
+      }
+    ]
+  },
+  "CPMAC_1": {
+    "nome": "Curso de Planejamento de Missões Aéreas Compostas – CPMAC",
+    "sigla": "CPMAC",
+    "edicao": "2026",
+    "periodo_local": "AN - 04 maio à 08 maio",
+    "coordenacao": {
+      "Coordenação Técnica": ""
+    },
+    "parecer": "",
+    "acoes": [],
+    "notas": [
+      {
+        "titulo": "Desempenho dos Discentes",
+        "imagem": ""
+      },
+      {
+        "titulo": "Frequência de Notas da Turma",
+        "imagem": ""
+      },
+      {
+        "titulo": "Histograma do Desempenho da Turma em relação aos 3 últimos anos",
+        "imagem": ""
+      }
+    ]
+  },
+  "CCE_1": {
+    "nome": "Curso de Comando e Emprego – CCE",
+    "sigla": "CCE",
+    "edicao": "2026",
+    "periodo_local": "BR - 08 juhho à 19 juhho",
+    "coordenacao": {
+      "Coordenação Técnica": ""
+    },
+    "parecer": "",
+    "acoes": [],
+    "notas": [
+      {
+        "titulo": "Desempenho dos Discentes",
+        "imagem": ""
+      },
+      {
+        "titulo": "Frequência de Notas da Turma",
+        "imagem": ""
+      },
+      {
+        "titulo": "Histograma do Desempenho da Turma em relação aos 3 últimos anos",
+        "imagem": ""
+      }
+    ]
+  },
+  "CSAA_1": {
+    "nome": "Curso de Seleção de Alvos e de Armamento – CSAA",
+    "sigla": "CSAA",
+    "edicao": "2026",
+    "periodo_local": "NT - 15 juhho à 10 julho",
+    "coordenacao": {
+      "Coordenação Técnica": ""
+    },
+    "parecer": "",
+    "acoes": [],
+    "notas": [
+      {
+        "titulo": "Desempenho dos Discentes",
+        "imagem": ""
+      },
+      {
+        "titulo": "Frequência de Notas da Turma",
+        "imagem": ""
+      },
+      {
+        "titulo": "Histograma do Desempenho da Turma em relação aos 3 últimos anos",
+        "imagem": ""
+      }
+    ]
+  },
+  "COGE": {
+    "nome": "Curso Operacional de Guerra Eletrônica (COGE)",
+    "sigla": "COGE",
+    "edicao": "2026",
+    "periodo_local": "SJ - 13 julho à 14 agosto",
+    "coordenacao": {
+      "Coordenação Técnica": ""
+    },
+    "parecer": "",
+    "acoes": [],
+    "notas": [
+      {
+        "titulo": "Desempenho dos Discentes",
+        "imagem": ""
+      },
+      {
+        "titulo": "Frequência de Notas da Turma",
+        "imagem": ""
+      },
+      {
+        "titulo": "Histograma do Desempenho da Turma em relação aos 3 últimos anos",
+        "imagem": ""
+      }
+    ]
+  },
+  "COSR": {
+    "nome": "Curso Operacional de Sensoriamento Remoto (COSR)",
+    "sigla": "COSR",
+    "edicao": "2026",
+    "periodo_local": "NT - 20 julho à 21 agosto",
+    "coordenacao": {
+      "Coordenação Técnica": ""
+    },
+    "parecer": "",
+    "acoes": [],
+    "notas": [
+      {
+        "titulo": "Desempenho dos Discentes",
+        "imagem": ""
+      },
+      {
+        "titulo": "Frequência de Notas da Turma",
+        "imagem": ""
+      },
+      {
+        "titulo": "Histograma do Desempenho da Turma em relação aos 3 últimos anos",
+        "imagem": ""
+      }
+    ]
+  },
+  "CADS": {
+    "nome": "Curso de Autodefesa de Superfície (CADS)",
+    "sigla": "CADS",
+    "edicao": "2026",
+    "periodo_local": "NT - 16 agosto à 25 setembro",
+    "coordenacao": {
+      "Coordenação Técnica": ""
+    },
+    "parecer": "",
+    "acoes": [],
+    "notas": [
+      {
+        "titulo": "Desempenho dos Discentes",
+        "imagem": ""
+      },
+      {
+        "titulo": "Frequência de Notas da Turma",
+        "imagem": ""
+      },
+      {
+        "titulo": "Histograma do Desempenho da Turma em relação aos 3 últimos anos",
+        "imagem": ""
+      }
+    ]
+  },
+  "CPEAAE-B_1": {
+    "nome": "Curso de Planejamento de Emprego de Armamento Aéreo – Básico (CPEAAE-B)",
+    "sigla": "CPEAAE-B",
+    "edicao": "2026 - 1ª Edição",
+    "periodo_local": "23 março à 21 maio",
+    "coordenacao": {
+      "Coordenação Técnica": ""
+    },
+    "parecer": "",
+    "acoes": []
+  },
+  "CBIV_1": {
+    "nome": "Curso Básico de Instrutor de Voo (CBIV)",
+    "sigla": "CBIV",
+    "edicao": "2026 - 1ª Edição",
+    "periodo_local": "23 março à 21 maio",
+    "coordenacao": {
+      "Coordenação Técnica": ""
+    },
+    "parecer": "",
+    "acoes": []
+  },
+  "CBIC_1": {
+    "nome": "Curso Básico de Instrutor do COMPREP (CBIC)",
+    "sigla": "CBIC",
+    "edicao": "2026 - 1ª Edição",
+    "periodo_local": "23 março à 21 maio",
+    "coordenacao": {
+      "Coordenação Técnica": ""
+    },
+    "parecer": "",
+    "acoes": []
+  },
+  "CDSPA_1": {
+    "nome": "Curso Doutrinário de Segurança e Proteção de Autoridades (CDSPA)",
+    "sigla": "CDSPA",
+    "edicao": "2026 - 1ª Edição",
+    "periodo_local": "23 março à 22 maio",
+    "coordenacao": {
+      "Coordenação Técnica": ""
+    },
+    "parecer": "",
+    "acoes": []
+  },
+  "CTAI_1": {
+    "nome": "Curso de Tráfego Aéreo Internacional (CTAI)",
+    "sigla": "CTAI",
+    "edicao": "2026 - 1ª Edição",
+    "periodo_local": "23 março à 25 junho",
+    "coordenacao": {
+      "Coordenação Técnica": ""
+    },
+    "parecer": "",
+    "acoes": []
+  },
+  "CBEAT-R_1": {
+    "nome": "Curso Básico de Emprego da Aviação de Transporte (CBEAT)",
+    "sigla": "CBEAT-R",
+    "edicao": "2026 - 1ª Edição",
+    "periodo_local": "23 março à 25 junho",
+    "coordenacao": {
+      "Coordenação Técnica": ""
+    },
+    "parecer": "",
+    "acoes": []
+  },
+  "CBEAT_1": {
+    "nome": "Curso Básico de Emprego da Aviação de Transporte (CBEAT)",
+    "sigla": "CBEAT",
+    "edicao": "2026 - 2ª Edição",
+    "periodo_local": "",
+    "coordenacao": {
+      "Coordenação Técnica": ""
+    },
+    "parecer": "",
+    "acoes": []
+  },
+  "CBBS_1": {
+    "nome": "Curso Básico de Busca e Salvamento (CBBS)",
+    "sigla": "CBBS",
+    "edicao": "2026 - 1ª Edição",
+    "periodo_local": "27 abril à 25 junho",
+    "coordenacao": {
+      "Coordenação Técnica": ""
+    },
+    "parecer": "",
+    "acoes": []
+  },
+  "CBSR_1": {
+    "nome": "Curso Básico de Sensoriamento Remoto (CBSR)",
+    "sigla": "CBSR",
+    "edicao": "2026 - 1ª Edição",
+    "periodo_local": "27 abril à 25 junho",
+    "coordenacao": {
+      "Coordenação Técnica": ""
+    },
+    "parecer": "",
+    "acoes": []
+  },
+  "CDDAE_1": {
+    "nome": "Curso Doutrinário de Defesa Antiaérea (CDDAAE)",
+    "sigla": "CDDAE",
+    "edicao": "2026 - 1ª Edição",
+    "periodo_local": "27 abril à 25 junho",
+    "coordenacao": {
+      "Coordenação Técnica": ""
+    },
+    "parecer": "",
+    "acoes": []
+  },
+  "CDPIOT_1": {
+    "nome": "Curso Doutrinário de Preparação de Instrutores de Operações Terrestres (CDPIOT)",
+    "sigla": "CDPIOT",
+    "edicao": "2026 - 1ª Edição",
+    "periodo_local": "27 abril à 25 junho",
+    "coordenacao": {
+      "Coordenação Técnica": ""
+    },
+    "parecer": "",
+    "acoes": []
+  },
+  "CCGAAT_1": {
+    "nome": "Curso de Controle e Guia Aéreo Avançado – Teórico (CCGAA-T)",
+    "sigla": "CCGAAT",
+    "edicao": "2026 - 1ª Edição",
+    "periodo_local": "11 maio à 31 julho",
+    "coordenacao": {
+      "Coordenação Técnica": ""
+    },
+    "parecer": "",
+    "acoes": []
+  },
+  "CDSPA_2": {
+    "nome": "Curso Doutrinário de Segurança e Proteção de Autoridades (CDSPA) - Turma 2",
+    "sigla": "CDSPA",
+    "edicao": "2026 - 2ª Edição",
+    "periodo_local": "01 junho à 31 julho",
+    "coordenacao": {
+      "Coordenação Técnica": ""
+    },
+    "parecer": "",
+    "acoes": []
+  },
+  "CBR_1": {
+    "nome": "Curso Básico de Reconhecimento (CBR)",
+    "sigla": "CBR",
+    "edicao": "2026 - 1ª Edição",
+    "periodo_local": "06 julho à 03 setembro",
+    "coordenacao": {
+      "Coordenação Técnica": ""
+    },
+    "parecer": "",
+    "acoes": []
+  },
+  "CCBVR-DA_1": {
+    "nome": "Curso de Combate BVR - Módulo Defesa Aérea (CCBVR-DA)",
+    "sigla": "CCBVR-DA",
+    "edicao": "2026 - 1ª Edição",
+    "periodo_local": "03 agosto à 01 outubro",
+    "coordenacao": {
+      "Coordenação Técnica": ""
+    },
+    "parecer": "",
+    "acoes": []
+  },
+  "CBIV_2": {
+    "nome": "Curso Básico de Instrutor de Voo (CBIV)",
+    "sigla": "CBIV",
+    "edicao": "2026 - 2ª Edição",
+    "periodo_local": "03 agosto à 01 outubro",
+    "coordenacao": {
+      "Coordenação Técnica": ""
+    },
+    "parecer": "",
+    "acoes": []
+  },
+  "CBIC_2": {
+    "nome": "Curso Básico de Instrutor do COMPREP (CBIC)",
+    "sigla": "CBIC",
+    "edicao": "2026 - 2ª Edição",
+    "periodo_local": "03 agosto à 01 outubro",
+    "coordenacao": {
+      "Coordenação Técnica": ""
+    },
+    "parecer": "",
+    "acoes": []
+  },
+  "CDDAAE_2": {
+    "nome": "Curso Doutrinário de Defesa Antiaérea (CDDAAE)",
+    "sigla": "CDDAAE",
+    "edicao": "2026 - 2ª Edição",
+    "periodo_local": "03 agosto à 01 outubro",
+    "coordenacao": {
+      "Coordenação Técnica": ""
+    },
+    "parecer": "",
+    "acoes": []
+  },
+  "CBMAC_1": {
+    "nome": "Curso Básico de Missões Aéreas Compostas (CBMAC)",
+    "sigla": "CBMAC",
+    "edicao": "2026 - 1ª Edição",
+    "periodo_local": "17 agosto à 15 outubro",
+    "coordenacao": {
+      "Coordenação Técnica": ""
+    },
+    "parecer": "",
+    "acoes": []
+  },
+  "EPIV_1": {
+    "nome": "Estágio de Padronização de Instrutor de Voo (EPIV)",
+    "sigla": "EPIV",
+    "edicao": "2026",
+    "periodo_local": "NT - 23 março à 03 abril",
+    "coordenacao": {
+      "Coordenação Técnica": ""
+    },
+    "parecer": "",
+    "acoes": [],
+    "notas": [
+      {
+        "titulo": "Desempenho dos Discentes",
+        "imagem": ""
+      },
+      {
+        "titulo": "Frequência de Notas da Turma",
+        "imagem": ""
+      },
+      {
+        "titulo": "Histograma do Desempenho da Turma em relação aos 3 últimos anos",
+        "imagem": ""
+      }
+    ]
+  },
+  "CCUT": {
+    "nome": "Curso de Comandante de Unidade de Tiro – CCUT",
+    "sigla": "CCUT",
+    "edicao": "2026",
+    "periodo_local": "AN - 23 março à 17 abril",
+    "coordenacao": {
+      "Coordenação Técnica": ""
+    },
+    "parecer": "",
+    "acoes": [],
+    "notas": [
+      {
+        "titulo": "Desempenho dos Discentes",
+        "imagem": ""
+      },
+      {
+        "titulo": "Frequência de Notas da Turma",
+        "imagem": ""
+      },
+      {
+        "titulo": "Histograma do Desempenho da Turma em relação aos 3 últimos anos",
+        "imagem": ""
+      }
+    ]
+  },
+  "CBS": {
+    "nome": "Curso de Busca e Salvamento",
+    "sigla": "CBS",
+    "edicao": "2026",
+    "periodo_local": "YS/AF/SC/MN/NT - 06 abril à 17 julho",
+    "coordenacao": {
+      "Coordenação Técnica": ""
+    },
+    "parecer": "",
+    "acoes": [],
+    "notas": [
+      {
+        "titulo": "Desempenho dos Discentes",
+        "imagem": ""
+      },
+      {
+        "titulo": "Frequência de Notas da Turma",
+        "imagem": ""
+      },
+      {
+        "titulo": "Histograma do Desempenho da Turma em relação aos 3 últimos anos",
+        "imagem": ""
+      }
+    ]
+  },
+  "CBCOIIM": {
+    "nome": "Curso Básico de Capacitação Operacional em Inteligência de Imagens (CBCOIIM)",
+    "sigla": "CBCOIIM",
+    "edicao": "2026",
+    "periodo_local": "NT - 14 setembro à 27 novembro",
+    "coordenacao": {
+      "Coordenação Técnica": ""
+    },
+    "parecer": "",
+    "acoes": [],
+    "notas": [
+      {
+        "titulo": "Desempenho dos Discentes",
+        "imagem": ""
+      },
+      {
+        "titulo": "Frequência de Notas da Turma",
+        "imagem": ""
+      },
+      {
+        "titulo": "Histograma do Desempenho da Turma em relação aos 3 últimos anos",
+        "imagem": ""
+      }
+    ]
+  },
+  "CODOUT": {
+    "nome": "Curso de Oficiais de Doutrina (CODOUT)",
+    "sigla": "CODOUT",
+    "edicao": "2026",
+    "periodo_local": "NT - 05 outubro à 24 outubro",
+    "coordenacao": {
+      "Coordenação Técnica": ""
+    },
+    "parecer": "",
+    "acoes": [],
+    "notas": [
+      {
+        "titulo": "Desempenho dos Discentes",
+        "imagem": ""
+      },
+      {
+        "titulo": "Frequência de Notas da Turma",
+        "imagem": ""
+      },
+      {
+        "titulo": "Histograma do Desempenho da Turma em relação aos 3 últimos anos",
+        "imagem": ""
+      }
+    ]
+  },
+  "CMAUT": {
+    "nome": "Curso de Mergulho Autônomo (CMAUT)",
+    "sigla": "CMAUT",
+    "edicao": "2026",
+    "periodo_local": "CG - 05 outubro à 13 novembro",
+    "coordenacao": {
+      "Coordenação Técnica": ""
+    },
+    "parecer": "",
+    "acoes": [],
+    "notas": [
+      {
+        "titulo": "Desempenho dos Discentes",
+        "imagem": ""
+      },
+      {
+        "titulo": "Frequência de Notas da Turma",
+        "imagem": ""
+      },
+      {
+        "titulo": "Histograma do Desempenho da Turma em relação aos 3 últimos anos",
+        "imagem": ""
+      }
+    ]
+  },
+  "CBDl-HF": {
+    "nome": "Curso Básico de Datalink-HF (CBDL-HF)",
+    "sigla": "CBDl-HF",
+    "edicao": "2026",
+    "periodo_local": "NT - 03 novembro à 13 novembro",
+    "coordenacao": {
+      "Coordenação Técnica": ""
+    },
+    "parecer": "",
+    "acoes": [],
+    "notas": [
+      {
+        "titulo": "Desempenho dos Discentes",
+        "imagem": ""
+      },
+      {
+        "titulo": "Frequência de Notas da Turma",
+        "imagem": ""
+      },
+      {
+        "titulo": "Histograma do Desempenho da Turma em relação aos 3 últimos anos",
+        "imagem": ""
+      }
+    ]
+  },
+  "CTAI_2": {
+    "nome": "Curso de Tráfego Aéreo Internacional (CTAI)",
+    "sigla": "CTAI",
+    "edicao": "2026 - 2ª Edição",
+    "periodo_local": "03 agosto à 13 novembro",
+    "coordenacao": {
+      "Coordenação Técnica": ""
+    },
+    "parecer": "",
+    "acoes": [],
+    "notas": [
+      {
+        "titulo": "Desempenho dos Discentes",
+        "imagem": ""
+      },
+      {
+        "titulo": "Frequência de Notas da Turma",
+        "imagem": ""
+      },
+      {
+        "titulo": "Histograma do Desempenho da Turma em relação aos 3 últimos anos",
+        "imagem": ""
+      }
+    ]
+  },
+  "CDPIOT_2": {
+    "nome": "Curso Doutrinário de Preparação de Instrutores de Operações Terrestres (CDPIOT)",
+    "sigla": "CDPIOT",
+    "edicao": "2026 - 2ª Edição",
+    "periodo_local": "05 outubro à 27 novembro",
+    "coordenacao": {
+      "Coordenação Técnica": ""
+    },
+    "parecer": "",
+    "acoes": [],
+    "notas": [
+      {
+        "titulo": "Desempenho dos Discentes",
+        "imagem": ""
+      },
+      {
+        "titulo": "Frequência de Notas da Turma",
+        "imagem": ""
+      },
+      {
+        "titulo": "Histograma do Desempenho da Turma em relação aos 3 últimos anos",
+        "imagem": ""
+      }
+    ]
+  },
+  "CBR_2": {
+    "nome": "Curso Básico de Reconhecimento (CBR) - Turma 2",
+    "sigla": "CBR",
+    "edicao": "2026 - 2ª Edição",
+    "periodo_local": "05 outubro à 27 novembro",
+    "coordenacao": {
+      "Coordenação Técnica": ""
+    },
+    "parecer": "",
+    "acoes": [],
+    "notas": [
+      {
+        "titulo": "Desempenho dos Discentes",
+        "imagem": ""
+      },
+      {
+        "titulo": "Frequência de Notas da Turma",
+        "imagem": ""
+      },
+      {
+        "titulo": "Histograma do Desempenho da Turma em relação aos 3 últimos anos",
+        "imagem": ""
+      }
+    ]
+  }
+}
