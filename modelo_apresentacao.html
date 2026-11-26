@@ -1,4 +1,13 @@
 <!doctype html>
+<!--
+  Notas de design (SKILL (1).md = estrutura/paleta/títulos; SKILL.md = números/escalas/cor semântica):
+  - Deck com espinha: capa, roteiro, divisores de seção, resumo com ações, apêndice.
+  - Título = achado calculado do dado; escopo, pergunta e n ficam no subtítulo.
+  - Cor: azul para o que está bem, âmbar/vermelho só para o que pede atenção, cinza para "não observado".
+  - Gráficos de barras são HTML/CSS próprios (sem charts-lib); os de notas vêm do script como SVG.
+  - Base pequena (n < SMALL_N) não vira percentual grande: aparece "x de y" e o aviso.
+  - Sem __DRAFT__ (modo normal) slides vazios são omitidos; com --rascunho aparecem como "A preencher".
+-->
 <html lang="pt-BR">
   <head>
     <meta charset="utf-8" />
@@ -6,19 +15,28 @@
     <title>Pesquisa de Satisfação de Cursos – 2026</title>
     <style>
       :root {
-        --bg: #0c1b2c;
-        --bg2: #13283f;
-        --tx: #eef3f8;
-        --mu: #93a6ba;
-        --ac: #f2b632;
-        --tr: #1c334d;
+        --bg: #f4f6fa;
+        --bg2: #ffffff;
+        --tx: #0f1f3a;
+        --mu: #5b6b82;
+        --tr: #dde3ec;
+        --navy: #00205f;
+        --ac: #2f6fb5;
+        --warm: #e0a21b;
+        --warmtx: #9a6200;
+        --bad: #c93c3c;
+        --p1: #bfe6f4;
+        --p2: #fbc9b8;
+        --p3: #fde5b3;
+        --p4: #c9f0d5;
+        --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
       }
       * {
         box-sizing: border-box;
         margin: 0;
       }
       html {
-        font-size: clamp(13px, 1.35vw, 24px);
+        font-size: clamp(14px, 1.35vw, 26px);
       }
       body {
         background: var(--bg);
@@ -35,19 +53,25 @@
         align-items: center;
         gap: 1rem;
         padding: 0.6rem 1.4rem;
-        background: var(--bg2);
-        border-bottom: 2px solid var(--ac);
-        font-size: 0.8rem;
-        color: var(--mu);
+        background: var(--navy);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+        font-size: 0.85rem;
+        letter-spacing: 0.04em;
+        color: #dce6f7;
       }
       select {
-        background: var(--bg);
-        color: var(--tx);
-        border: 1px solid var(--tr);
+        background: rgba(255, 255, 255, 0.1);
+        color: #fff;
+        border: 1px solid rgba(255, 255, 255, 0.35);
         border-radius: 6px;
         padding: 0.3rem 0.5rem;
-        font-size: 0.8rem;
+        font-size: 0.85rem;
         max-width: 46vw;
+      }
+      select option,
+      select optgroup {
+        color: var(--tx);
+        background: #fff;
       }
       main {
         position: relative;
@@ -56,10 +80,30 @@
         padding: 1.2rem 2rem 0.6rem;
         display: flex;
         flex-direction: column;
+        background: var(--bg);
+      }
+      main.dark,
+      .page.dark {
+        background: var(--navy);
+        color: #fff;
+        --tx: #ffffff;
+        --mu: #b9c6da;
+        --bg2: rgba(255, 255, 255, 0.08);
+        --tr: rgba(255, 255, 255, 0.22);
+      }
+      main.dark .sec,
+      .page.dark .sec {
+        color: var(--p3);
+      }
+      .sl {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        min-height: 0;
       }
       .sec {
         color: var(--ac);
-        font-size: 0.8rem;
+        font-size: 0.85rem;
         letter-spacing: 0.12em;
         text-transform: uppercase;
         font-weight: 700;
@@ -70,37 +114,20 @@
         margin: 0.4rem 0;
       }
       h2 {
-        font-size: 1.25rem;
-        font-weight: 600;
-        margin: 0.25rem 0 0.9rem;
-        line-height: 1.25;
+        font-size: 1.7rem;
+        font-weight: 700;
+        margin: 0.3rem 0 0.25rem;
+        line-height: 1.2;
       }
-      .cover {
-        justify-content: center;
-      }
-      .cover p {
+      .sub {
         color: var(--mu);
-        font-size: 1.1rem;
-        margin-top: 0.5rem;
+        font-size: 1rem;
+        line-height: 1.3;
+        margin-bottom: 0.9rem;
       }
-      .kpis {
-        display: flex;
-        gap: 1.5rem;
-        margin-top: 2rem;
-      }
-      .kpi {
-        background: var(--bg2);
-        border-left: 4px solid var(--ac);
-        padding: 0.8rem 1.2rem;
-        border-radius: 6px;
-      }
-      .kpi b {
-        font-size: 2rem;
-        display: block;
-      }
-      .kpi span {
-        color: var(--mu);
-        font-size: 0.8rem;
+      .wn {
+        color: var(--warmtx);
+        font-weight: 700;
       }
       .rows {
         flex: 1;
@@ -111,52 +138,182 @@
       }
       .row {
         flex: 1;
-        min-height: 0;
+        min-height: 1.6rem;
         display: grid;
-        grid-template-columns: 24% 1fr 4.5rem;
+        grid-template-columns: 26% 1fr 4rem 11rem;
         align-items: center;
         gap: 0.8rem;
       }
       .row .l {
-        font-size: 0.78rem;
+        font-size: 1rem;
         text-align: right;
         line-height: 1.15;
       }
       .row .n {
-        font-size: 0.72rem;
+        font-size: 0.9rem;
         color: var(--mu);
+      }
+      .row .n.wn {
+        color: var(--warmtx);
       }
       .bar {
         display: flex;
+        gap: 2px;
         height: 72%;
         max-height: 2.3rem;
-        border-radius: 5px;
-        overflow: hidden;
-        background: var(--tr);
+        position: relative;
       }
       .big {
         display: block;
-        margin: 1.2rem 0;
+        margin: 0.9rem 0 1.1rem;
       }
       .big .bar {
-        height: 6.5rem;
+        height: 5.6rem;
         max-height: none;
-        font-size: 1.3rem;
-      }
-      .big .seg {
-        font-size: 1.3rem;
       }
       .seg {
         display: flex;
         align-items: center;
         justify-content: center;
+        min-width: 0;
+        position: relative;
+        border-radius: 4px;
         font-weight: 700;
-        font-size: 0.75rem;
-        overflow: hidden;
+        font-size: 0.85rem;
         white-space: nowrap;
+        transition: opacity 140ms var(--ease-out);
+      }
+      .seg::after {
+        content: attr(data-tip);
+        position: absolute;
+        bottom: calc(100% + 6px);
+        left: 50%;
+        transform: translate(-50%, 3px) scale(0.97);
+        transform-origin: 50% 100%;
+        opacity: 0;
+        pointer-events: none;
+        z-index: 5;
+        background: var(--navy);
+        color: #fff;
+        border-radius: 6px;
+        padding: 0.25rem 0.55rem;
+        font-size: 0.8rem;
+        font-weight: 600;
+        transition: opacity 125ms var(--ease-out), transform 125ms var(--ease-out);
+      }
+      @media (hover: hover) and (pointer: fine) {
+        .bar:hover .seg:not(:hover) {
+          opacity: 0.45;
+        }
+        .seg:hover::after {
+          opacity: 1;
+          transform: translate(-50%, 0) scale(1);
+        }
+        button:hover {
+          border-color: var(--ac);
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .seg::after {
+          transform: translate(-50%, 0);
+          transition: opacity 125ms ease;
+        }
+      }
+      button {
+        transition: transform 160ms var(--ease-out), border-color 160ms ease;
+      }
+      button:active {
+        transform: scale(0.97);
+      }
+      .opts {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+        gap: 0.7rem;
+        margin-top: 0.4rem;
+      }
+      .opt {
+        background: var(--bg2);
+        border: 1px solid var(--tr);
+        border-radius: 8px;
+        border-top: 4px solid;
+        padding: 0.8rem 1rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.1rem;
+      }
+      .opt span {
+        color: var(--mu);
+        font-size: 1rem;
+      }
+      .opt b {
+        font-size: 2.4rem;
+        font-variant-numeric: tabular-nums;
+      }
+      .opt b i {
+        font-size: 1.1rem;
+        font-style: normal;
+        font-weight: 600;
+        color: var(--mu);
+      }
+      .opt small {
+        color: var(--mu);
+        font-size: 0.9rem;
+      }
+      .opt.z {
+        opacity: 0.5;
+      }
+      .chip {
+        justify-self: start;
+        text-align: center;
+        font-weight: 700;
+        font-size: 0.95rem;
+        border-radius: 999px;
+        padding: 0.1rem 0.6rem;
+        font-variant-numeric: tabular-nums;
+      }
+      .chip.ok {
+        background: #dce9f7;
+        color: var(--navy);
+      }
+      .chip.warn {
+        background: var(--p3);
+        color: var(--warmtx);
+      }
+      .rh {
+        flex: 0 0 auto;
+        min-height: 0;
+        font-size: 0.8rem;
+        color: var(--mu);
+        letter-spacing: 0.08em;
+      }
+      .track {
+        position: relative;
+        height: 62%;
+        max-height: 1.4rem;
+        background: var(--tr);
+        border-radius: 999px;
+      }
+      .fill {
+        height: 100%;
+        border-radius: 999px;
+        background: var(--ac);
+      }
+      .fill.w {
+        background: var(--warm);
+      }
+      .fill.w2 {
+        background: rgba(224, 162, 27, 0.4);
+      }
+      .ref {
+        position: absolute;
+        top: -4px;
+        bottom: -4px;
+        width: 2px;
+        background: var(--navy);
+        opacity: 0.55;
       }
       .none {
-        font-size: 0.72rem;
+        font-size: 0.9rem;
         color: var(--mu);
         padding-left: 0.6rem;
         align-self: center;
@@ -166,7 +323,7 @@
         flex-wrap: wrap;
         gap: 0.4rem 1.2rem;
         padding: 0.6rem 0;
-        font-size: 0.74rem;
+        font-size: 0.9rem;
         color: var(--mu);
       }
       .leg i {
@@ -177,20 +334,50 @@
         margin-right: 0.35rem;
         vertical-align: -0.1rem;
       }
-      table {
+      .perf-table {
         width: 100%;
-        border-collapse: collapse;
-        font-size: 1.1rem;
-        margin-top: 0.4rem;
+        max-width: 56rem;
+        border-collapse: separate;
+        border-spacing: 0;
+        margin-top: 0.2rem;
+        background: var(--bg2);
+        border: 1px solid var(--tr);
+        border-radius: 8px;
+        overflow: hidden;
+        font-size: 1rem;
       }
-      td {
-        padding: 0.35rem 0.6rem;
+      .perf-table th {
+        background: #e9eff8;
+        color: var(--navy);
+        text-align: left;
+        padding: 0.45rem 0.85rem;
+        font-size: 0.8rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        border-bottom: 2px solid var(--ac);
+      }
+      .perf-table th:last-child,
+      .perf-table td:last-child {
+        text-align: right;
+      }
+      .perf-table td {
+        padding: 0.38rem 0.85rem;
         border-bottom: 1px solid var(--tr);
       }
-      td:nth-child(n + 2) {
-        text-align: right;
-        color: var(--mu);
-        width: 8rem;
+      .perf-table tr:nth-child(even) td {
+        background: #f7f9fc;
+      }
+      .perf-table tr:last-child td {
+        border-bottom: none;
+      }
+      .perf-table td:last-child {
+        font-weight: 700;
+        color: var(--navy);
+        font-variant-numeric: tabular-nums;
+      }
+      .perf-table tr.warn td {
+        background: var(--p3);
+        color: var(--warmtx);
       }
       .capa {
         display: flex;
@@ -207,29 +394,102 @@
         width: auto;
         object-fit: contain;
         margin: 0 auto 1.2rem;
+        background: #fff;
+        padding: 0.7rem;
+        border-radius: 16px;
       }
       .capa h1 {
         width: 100%;
         text-align: center;
-        margin-left: auto;
-        margin-right: auto;
       }
       .capa p {
         width: 100%;
         text-align: center;
+        color: var(--mu);
+        font-size: 1.15rem;
+        margin-top: 0.4rem;
       }
-      .kv {
-        margin: 0.55rem 0;
+      .capa p.org {
+        margin-top: 1.4rem;
+        font-size: 1rem;
+      }
+      .ag {
+        list-style: none;
+        padding: 0;
+        margin: 0.8rem 0 0;
+        display: flex;
+        flex-direction: column;
+        gap: 0.9rem;
+      }
+      .ag li {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        font-size: 1.5rem;
+      }
+      .ag b {
+        width: 2.6rem;
+        height: 2.6rem;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--navy);
+        font-size: 1.3rem;
+      }
+      .sdiv {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 1rem;
+      }
+      .sdiv .num {
+        width: 4.5rem;
+        height: 4.5rem;
+        border-radius: 50%;
+        background: var(--p3);
+        color: var(--navy);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 2.4rem;
+        font-weight: 800;
+      }
+      .stmt {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 1rem;
+      }
+      .cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+        gap: 1rem;
+      }
+      .card {
+        border-radius: 12px;
+        padding: 1rem 1.2rem;
+        color: var(--navy);
+        display: flex;
+        flex-direction: column;
+        gap: 0.35rem;
+      }
+      .card b {
+        font-size: 2.6rem;
+        line-height: 1;
+        font-variant-numeric: tabular-nums;
+      }
+      .card span {
         font-size: 1.05rem;
-        line-height: 1.45;
-      }
-      .kv b {
-        color: var(--ac);
+        line-height: 1.25;
       }
       .ul2 {
         list-style: none;
-        margin: 0.4rem 0 0 1.2rem;
-        font-size: 1.05rem;
+        padding: 0;
+        margin: 0.4rem 0 0 0.2rem;
+        font-size: 1.15rem;
         line-height: 1.45;
       }
       .ul2 li {
@@ -251,14 +511,33 @@
         align-items: center;
       }
       img.nota {
-        max-width: 100%;
-        max-height: 100%;
+        width: 100%;
+        height: 100%;
         object-fit: contain;
-        background: #fff;
-        border-radius: 6px;
+        background: var(--bg2);
+        border: 1px solid var(--tr);
+        border-radius: 8px;
+        padding: 0.4rem;
+      }
+      .qts {
+        display: flex;
+        flex-direction: column;
+        gap: 0.8rem;
+        flex: 1;
+        min-height: 0;
+        overflow: auto;
+      }
+      blockquote {
+        background: var(--bg2);
+        border: 1px solid var(--tr);
+        border-left: 5px solid var(--ac);
+        border-radius: 8px;
+        padding: 0.8rem 1.1rem;
+        font-size: 1.1rem;
+        line-height: 1.4;
       }
       .cb {
-        font-size: 0.72rem;
+        font-size: 0.9rem;
         color: var(--ac);
         padding-top: 0.3rem;
       }
@@ -268,13 +547,15 @@
       .cm {
         position: absolute;
         inset: 4rem 2rem 2.5rem;
-        background: #0c1b2c;
+        background: #fff;
+        color: var(--tx);
         border: 1px solid var(--ac);
         border-radius: 8px;
         padding: 1rem 1.4rem;
         overflow: auto;
-        font-size: 0.85rem;
+        font-size: 1rem;
         line-height: 1.35;
+        box-shadow: 0 8px 30px rgba(0, 32, 95, 0.18);
       }
       .cm.all {
         position: static;
@@ -283,10 +564,12 @@
         border: 0;
         padding: 0;
         background: none;
+        box-shadow: none;
+        color: inherit;
       }
       .cm h3 {
         color: var(--ac);
-        font-size: 0.85rem;
+        font-size: 1rem;
         margin: 0.8rem 0 0.3rem;
       }
       .cm small {
@@ -296,7 +579,7 @@
         margin: 0 0 0.35rem 1.1rem;
       }
       .note {
-        font-size: 0.68rem;
+        font-size: 0.9rem;
         color: var(--mu);
         padding-top: 0.2rem;
       }
@@ -305,7 +588,7 @@
         justify-content: space-between;
         align-items: center;
         padding: 0.4rem 1.4rem;
-        font-size: 0.75rem;
+        font-size: 0.85rem;
         color: var(--mu);
       }
       button {
@@ -315,10 +598,52 @@
         border-radius: 6px;
         padding: 0.3rem 0.9rem;
         cursor: pointer;
-        font-size: 0.8rem;
+        font-size: 0.9rem;
       }
-      button:hover {
-        border-color: var(--ac);
+      #pr {
+        display: none;
+      }
+      @media print {
+        @page {
+          size: A4 landscape;
+          margin: 0;
+        }
+        html {
+          font-size: 15px;
+        }
+        body {
+          height: auto;
+          overflow: visible;
+          display: block;
+          background: #fff;
+        }
+        header,
+        main,
+        footer {
+          display: none !important;
+        }
+        #pr {
+          display: block;
+        }
+        .page {
+          width: 297mm;
+          height: 210mm;
+          padding: 12mm 14mm;
+          display: flex;
+          flex-direction: column;
+          page-break-after: always;
+          break-after: page;
+          overflow: hidden;
+          background: var(--bg);
+          -webkit-print-color-adjust: exact;
+          print-color-adjust: exact;
+        }
+        .page.dark {
+          background: var(--navy);
+        }
+        .cb {
+          display: none;
+        }
       }
     </style>
   </head>
@@ -328,65 +653,56 @@
       <select id="sel"></select>
     </header>
     <main id="m"></main>
+    <div id="pr"></div>
     <footer>
       <button onclick="go(-1)">◀ Anterior</button>
       <span id="pg"></span>
-      <span>← → navegar · F tela cheia</span>
+      <span>← → navegar · F tela cheia · Ctrl+P salva em PDF</span>
       <button onclick="go(1)">Próximo ▶</button>
     </footer>
     <script>
       const D = __DATA__;
-      const G = [
-          "#d64545",
-          "#ee7b3a",
-          "#f2b632",
-          "#a9cf54",
-          "#4cae6a",
-          "#1f8a54",
-        ],
-        GR = "#7b8794",
-        DK = "#1a1a1a";
+      const DRAFT = __DRAFT__;
+      const SMALL_N = 10; // base menor que isto não "grita" (mostra x de y e o aviso)
+      const META = 7; // média de referência na escala de 1 a 10
+      const DK = "#0f1f3a";
+      const PAST = ["#bfe6f4", "#fbc9b8", "#fde5b3", "#c9f0d5"];
+
+      // Azul = favorável, âmbar/laranja/vermelho = pede atenção, cinza = não observado
+      const G = ["#c93c3c", "#e4762f", "#e0a21b", "#a5c0e6", "#5b8fd0", "#1f4e99"],
+        GR = "#9aa6b5";
       const S10 = [
         GR,
-        "#c0392b",
-        "#d64545",
-        "#ee7b3a",
-        "#f2a03a",
-        "#f2c94c",
-        "#d6d84f",
-        "#a9cf54",
-        "#6fbf6a",
-        "#3fae6a",
-        "#1f8a54",
+        "#c93c3c",
+        "#d9572b",
+        "#e4762f",
+        "#e0a21b",
+        "#cfd8e6",
+        "#b5c6de",
+        "#8fb1dd",
+        "#5b8fd0",
+        "#3a71b8",
+        "#1f4e99",
       ];
       const SL = [
         "Não observado",
         ...Array.from({ length: 10 }, (_, i) => String(i + 1)),
       ];
+      const REV = ["1.1.1", "1.1.3", "2.1", "2.2", "2.3", "2.4", "2.7", "3.1", "3.2"];
 
       const Q = [
         [
           "1.1.1",
           "Em relação aos objetivos gerais, o desenvolvimento do curso:",
           "Objetivos",
-          [
-            "Contribuiu",
-            "Contribuiu parcialmente",
-            "Não contribuiu",
-            "Não foi possível avaliar",
-          ],
+          ["Contribuiu", "Contribuiu parcialmente", "Não contribuiu", "Não foi possível avaliar"],
           [G[5], G[2], G[0], GR],
         ],
         [
           "1.1.3",
           "Você acredita que o curso:",
           "Objetivos",
-          [
-            "Muita aplicabilidade",
-            "Pouca aplicabilidade",
-            "Apenas ampliou conhecimentos",
-            "Não forneceu bases",
-          ],
+          ["Muita aplicabilidade", "Pouca aplicabilidade", "Apenas ampliou conhecimentos", "Não forneceu bases"],
           [G[5], G[2], G[1], G[0]],
         ],
         [
@@ -407,13 +723,7 @@
           "2.3",
           "A organização possibilitou uma sequência racional das disciplinas, facilitando o aprendizado?",
           "Currículo",
-          [
-            "A melhor possível",
-            "Boa",
-            "Regular",
-            "Inadequada",
-            "Sem sequência lógica",
-          ],
+          ["A melhor possível", "Boa", "Regular", "Inadequada", "Sem sequência lógica"],
           [G[5], G[4], G[2], G[1], G[0]],
         ],
         [
@@ -427,13 +737,7 @@
           "2.7",
           "A organização possibilitou uma sequência racional das subunidades, facilitando a aprendizagem?",
           "Currículo",
-          [
-            "A melhor possível",
-            "Boa",
-            "Regular",
-            "Inadequada",
-            "Não foi possível avaliar",
-          ],
+          ["A melhor possível", "Boa", "Regular", "Inadequada", "Não foi possível avaliar"],
           [G[5], G[4], G[2], G[0], GR],
           "P",
         ],
@@ -453,32 +757,36 @@
         ],
       ];
 
+      // Opções favoráveis e a frase do achado (o título nasce do dado, nunca é escrito à mão)
+      const QT = {
+        "1.1.1": [["Contribuiu"], "dizem que o curso contribuiu para os objetivos gerais"],
+        "1.1.3": [["Muita aplicabilidade"], "veem muita aplicabilidade no que o curso ensinou"],
+        "2.1": [["Suficiente"], "consideram a duração do curso suficiente"],
+        "2.2": [["Excelente", "Boa"], "avaliam a escolha das disciplinas como boa ou excelente"],
+        "2.3": [["A melhor possível", "Boa"], "avaliam a sequência das disciplinas como boa ou melhor"],
+        "2.4": [["Sim"], "consideram o conteúdo do curso atualizado"],
+        "2.7": [["A melhor possível", "Boa"], "avaliam a sequência das subunidades como boa ou melhor"],
+        "3.1": [["Muito grande", "Grande"], "começaram o curso com interesse grande ou muito grande"],
+        "3.2": [["Acima do esperado", "Totalmente"], "tiveram as expectativas atendidas totalmente ou além"],
+      };
+
       const GP = [
-        [
-          "Instalações e serviços",
-          "Avaliação das instalações e serviços (1 a 10)",
-          18,
-          ["4.1.1"],
-        ],
-        ["Alimentação", "Rancho / alimentação (1 a 10)", 4, ["4.3.1"]],
-        ["Hotel de Trânsito", "Hotel de Trânsito (1 a 10)", 4, ["4.4.1"]],
-        ["Transporte", "Transporte (1 a 10)", 3, ["4.5.1"]],
+        ["Instalações e serviços", "Avaliação das instalações e serviços", 18, ["4.1.1"]],
+        ["Alimentação", "Rancho / alimentação", 4, ["4.3.1"]],
+        ["Hotel de Trânsito", "Hotel de Trânsito", 4, ["4.4.1"]],
+        ["Transporte", "Transporte", 3, ["4.5.1"]],
       ];
 
       const GE = [
-        [
-          "Recursos e material didático",
-          "Recursos e material didático (1 a 10)",
-          6,
-          ["4.1.2"],
-        ],
-        [
-          "Sistemática de Avaliação",
-          "Sistemática de Avaliação da Aprendizagem (1 a 10)",
-          5,
-          ["4.2.1"],
-        ],
-        ["Suporte EAD", "Suporte e Plataforma EAD (1 a 10)", 3, ["4.3.1"]],
+        ["Recursos e material didático", "Recursos e material didático", 6, ["4.1.2"]],
+        ["Sistemática de Avaliação", "Sistemática de Avaliação da Aprendizagem", 5, ["4.2.1"]],
+        ["Suporte EAD", "Suporte e Plataforma EAD", 3, ["4.3.1"]],
+      ];
+
+      const NOTAS0 = [
+        { titulo: "Desempenho dos Discentes", imagem: "" },
+        { titulo: "Frequência de Notas da Turma", imagem: "" },
+        { titulo: "Histograma do Desempenho da Turma em relação aos 3 últimos anos", imagem: "" },
       ];
 
       const AC = { intraer: "INTRAER", ava: "AVA", gite: "GITE", pts: "PTS" };
@@ -491,31 +799,60 @@
         s = s[0].toUpperCase() + s.slice(1);
         return s.replace(/\b\w+\b/g, (w) => AC[w.toLowerCase()] || w);
       };
-      const tx = (c) =>
-        ["#f2a03a", "#f2c94c", "#d6d84f", "#a9cf54", G[2], G[3]].includes(c)
-          ? DK
-          : "#fff";
-      const esc = (s) => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;");
+
+      // Cor do texto: a de maior contraste sobre o fundo do segmento
+      const lum = (c) => {
+        const h = c.replace("#", "");
+        const [r, g, b] = [0, 2, 4]
+          .map((i) => parseInt(h.substr(i, 2), 16) / 255)
+          .map((v) => (v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4)));
+        return 0.2126 * r + 0.7152 * g + 0.0722 * b;
+      };
+      const DKL = lum(DK);
+      const tx = (c) => {
+        const L = lum(c);
+        return 1.05 / (L + 0.05) >= (L + 0.05) / (DKL + 0.05) ? "#fff" : DK;
+      };
+      const esc = (s) =>
+        String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/"/g, "&quot;");
+      const f1 = (x) => x.toFixed(1).replace(".", ",");
+      const f2 = (x) => x.toFixed(2).replace(".", ",");
+      const r2 = (x) => Math.round(x * 100) / 100;
+      const sum = (a) => a.reduce((s, x) => s + x, 0);
+      const pct = (v, T) => (T ? ((v / T) * 100).toFixed(1).replace(".", ",") : "0,0");
+      const mean10 = (v) => {
+        let s = 0,
+          t = 0;
+        for (let i = 1; i < v.length; i++) {
+          s += i * v[i];
+          t += v[i];
+        }
+        return t ? s / t : null;
+      };
       const cmBlock = (t, l) =>
         `<h3>${esc(t)} <small>(${l.length})</small></h3><ul>${l.map((x) => `<li>${esc(x)}</li>`).join("")}</ul>`;
+
+      const mult = (c) => (Array.isArray(c.m) ? c.m : Object.entries(c.m || {}));
+      const SEM_DEF = /^(nenhum|n[ãa]o h[áa]|sem )/i; // opções que significam "sem deficiência"
 
       function defic(c) {
         const L = mult(c)
             .slice()
             .sort((a, b) => b[1] - a[1]),
-          B = c.n;
-        return `<div class="sec">Instalações e serviços · 4.2</div><h2>Quais as principais deficiências de infraestrutura observadas durante a realização do curso?</h2><div class="rows">${L.map(
+          B = c.n,
+          top = L.find((x) => !SEM_DEF.test(x[0]));
+        const titulo =
+          !top || !top[1]
+            ? "Nenhuma deficiência de infraestrutura foi marcada"
+            : `${top[0]} é a deficiência mais citada (${top[1]} de ${B})`;        const peq = B < SMALL_N;
+        return `<div class="sec">Instalações e serviços · 4.2</div><h2>${esc(titulo)}</h2><p class="sub">Quais as principais deficiências de infraestrutura observadas durante a realização do curso? · base: ${B} respondentes, múltipla escolha${peq ? ` · <b class="wn">base pequena</b>` : ""}</p><div class="rows">${L.map(
           ([l, v]) => {
             const p = B ? (v / B) * 100 : 0;
-            return `<div class="row" style="grid-template-columns:24% 1fr 9rem"><div class="l">${esc(l)}</div><div class="bar"><div style="width:${Math.min(p, 100)}%;background:var(--ac)"></div></div><div class="n" style="font-size:.85rem;color:var(--tx)">${v} · ${p.toFixed(1).replace(".", ",")}%</div></div>`;
+            const cls = top && l === top[0] ? "w" : SEM_DEF.test(l) ? "" : "w2";
+            return `<div class="row" style="grid-template-columns:30% 1fr 10rem"><div class="l">${esc(l)}</div><div class="track"><div class="fill ${cls}" style="width:${Math.min(p, 100)}%"></div></div><div class="n" style="color:var(--tx)">${v} de ${B}${peq ? "" : " · " + pct(v, B) + "%"}</div></div>`;
           },
-        ).join(
-          "",
-        )}</div><div class="note">Pergunta de múltipla escolha sobre ${B} respondentes.</div>`;
+        ).join("")}</div>`;
       }
-
-      const mult = (c) =>
-        Array.isArray(c.m) ? c.m : Object.entries(c.m || {});
 
       function agg(t) {
         const o = { t, n: 0, q: {}, s: null, k: 0, c: {}, m: {} };
@@ -530,20 +867,7 @@
               e[1].push(...l.map((x) => "[" + cd + "] " + x));
             }
             for (const [k, c] of Object.entries(v.q)) {
-              // Inverte tanto para Presencial (P) quanto para EAD (E) nas questões especificadas
-              if (
-                [
-                  "1.1.1",
-                  "1.1.3",
-                  "2.1",
-                  "2.2",
-                  "2.3",
-                  "2.4",
-                  "2.7",
-                  "3.1",
-                  "3.2",
-                ].includes(k)
-              ) {
+              if (REV.includes(k)) {
                 let rev = [...c].reverse();
                 let atual = o.q[k] || rev.map(() => 0);
                 o.q[k] = atual.map((val, idx) => val + rev[idx]);
@@ -568,19 +892,7 @@
           let original = D[k];
           if (!original) return null;
           baseObj = JSON.parse(JSON.stringify(original));
-          // Aplica inversão para qualquer curso (Presencial ou EAD)
-          const targetKeys = [
-            "1.1.1",
-            "1.1.3",
-            "2.1",
-            "2.2",
-            "2.3",
-            "2.4",
-            "2.7",
-            "3.1",
-            "3.2",
-          ];
-          for (let qKey of targetKeys) {
+          for (let qKey of REV) {
             if (baseObj.q && baseObj.q[qKey]) {
               baseObj.q[qKey] = baseObj.q[qKey].slice().reverse();
             }
@@ -589,13 +901,48 @@
         return baseObj;
       }
 
-      const seg = (v, p, c, l) =>
-        `<div class="seg" style="width:${p}%;background:${c};color:${tx(c)}" title="${l}: ${v}">${p >= 5 ? Math.round(p) + "%" : ""}</div>`;
+      // Dados de uma pergunta já na ordem de exibição (rótulos e cores acompanham as contagens)
+      function qinfo(c, id) {
+        const q = Q.find((x) => x[0] === id);
+        if (!q || (q[5] && q[5] != c.t)) return null;
+        const cnt = c.q[id];
+        if (!cnt) return null;
+        let labs = [...q[3]],
+          cols = [...q[4]];
+        if (REV.includes(id)) {
+          labs.reverse();
+          cols.reverse();
+        }
+        return { q, cnt, labs, cols, T: sum(cnt) };
+      }
 
-      function bar(cnt, cols, labs) {
-        const T = cnt.reduce((a, b) => a + b, 0);
+      // Achado calculado do dado: "92% dizem que…" ou "3 de 4 dizem que…" se a base é pequena
+      function achado(c, id) {
+        const qi = qinfo(c, id);
+        if (!qi || !qi.T) return null;
+        const [fav, frase] = QT[id];
+        const v = sum(qi.labs.map((l, i) => (fav.includes(l) ? qi.cnt[i] : 0)));
+        const x = qi.T < SMALL_N ? `${v} de ${qi.T}` : `${Math.round((v / qi.T) * 100)}%`;
+        return { x, frase, T: qi.T };
+      }
+
+      const seg = (v, p, c, l, txt) => {
+        const L = /^\d+$/.test(l) ? "Nota " + l : l;
+        return `<div class="seg" style="width:${p}%;background:${c};color:${tx(c)}" data-tip="${esc(L)} · ${v} resp. · ${p.toFixed(1).replace(".", ",")}%">${txt && p >= 6 ? Math.round(p) + "%" : ""}</div>`;
+      };
+      const chip = (m) => {
+        if (m == null) return `<div class="chip" style="color:var(--mu)">—</div>`;
+        return `<div class="chip ${m < META ? "warn" : "ok"}">${f1(m)}</div>`;
+      };
+      const opt = (l, c, v, T) => {
+        const peq = T < SMALL_N;
+        return `<div class="opt${v ? "" : " z"}" style="border-top-color:${c}"><span>${esc(l)}</span>${peq ? `<b>${v}<i> de ${T}</i></b>` : `<b>${pct(v, T)}%</b><small>${v} resp.</small>`}</div>`;
+      };
+
+      function bar(cnt, cols, labs, txt) {
+        const T = sum(cnt);
         if (!T) return `<div class="none">Sem respostas</div>`;
-        return `<div class="bar">${cnt.map((v, i) => (v ? seg(v, (v / T) * 100, cols[i], labs[i]) : "")).join("")}</div>`;
+        return `<div class="bar">${cnt.map((v, i) => (v ? seg(v, (v / T) * 100, cols[i], labs[i], txt) : "")).join("")}</div>`;
       }
 
       const leg = (cols, labs) =>
@@ -604,7 +951,7 @@
 
       const pan = (L) => {
         const N = L.reduce((a, [, l]) => a + l.length, 0);
-        return `<div class="cb">💬 ${N} comentário(s) · tecla C para ver/ocultar</div><div class="cm" hidden>${L.map(([t, l]) => cmBlock(t, l)).join("")}</div>`;
+        return `<div class="cb">Comentários (${N}) · tecla C para ver/ocultar</div><div class="cm" hidden>${L.map(([t, l]) => cmBlock(t, l)).join("")}</div>`;
       };
 
       const pagesOf = (L, B) => {
@@ -625,97 +972,234 @@
       };
 
       const LOGO = "__LOGO__";
-      const ph = (m) => `<div class="ph">${m}</div>`,
-        txt = (v, m) =>
-          v && String(v).trim() ? esc(v) : ph(m || "A preencher");
+      const ph = (m) => (DRAFT ? `<div class="ph">${m}</div>` : "");
 
-      const capa = (c, I, k) =>
+      // ---------- slides de estrutura ----------
+      const capaHTML = ({ sec, titulo, l1, l2, l3 }) =>
         `<div class="capa">${LOGO.length > 30 ? `<img class="logo" src="${LOGO}">` : ""}` +
-        `<div class="sec">Avaliação dos Cursos ${c.t == "P" ? "Presenciais" : "EAD"}</div>` +
-        `<h1>${esc(I.nome || k)}</h1>` +
-        `<p>${esc((I.edicao || "").trim())}</p>` +
-        `<p>${esc((I.periodo_local || "").trim())}</p>` +
-        `<p>Subdivisão de Avaliação e Controle - SDAC</p></div>`;
+        `<div class="sec">${esc(sec)}</div><h1>${esc(titulo)}</h1>` +
+        [l1, l2, l3]
+          .filter((t) => t && String(t).trim())
+          .map((t) => `<p>${esc(String(t).trim())}</p>`)
+          .join("") +
+        `<p class="org">Subdivisão de Avaliação e Controle – SDAC</p></div>`;
+
+      const agendaHTML = (nomes) =>
+        `<div class="sec">Roteiro</div><h2>O que vamos ver</h2><ol class="ag">${nomes.map((t, i) => `<li><b style="background:${PAST[i % 4]}">${i + 1}</b><span>${esc(t)}</span></li>`).join("")}</ol>`;
+
+      const dividerHTML = (n, t) =>
+        `<div class="sdiv"><div class="num">${n}</div><h1>${esc(t)}</h1></div>`;
+
+      const stmtHTML = (cards, acoes, mostrarAcoes) =>
+        `<div class="stmt"><div class="sec">Em resumo</div><h1>O que levar desta análise</h1>` +
+        (cards.length
+          ? `<div class="cards">${cards.map((c, i) => `<div class="card" style="background:${PAST[i % 4]}"><b>${esc(c.v)}</b><span>${esc(c.l)}</span></div>`).join("")}</div>`
+          : "") +
+        (mostrarAcoes
+          ? `<div class="sec" style="margin-top:.6rem">Ações demandadas</div>${acoes.length ? `<ul class="ul2">${acoes.map((x) => `<li>• ${esc(x)}</li>`).join("")}</ul>` : ph("A preencher")}`
+          : "") +
+        `</div>`;
+
+      const imgSlide = (sec, titulo, sub, img) =>
+        `<div class="sec">${esc(sec)}</div><h2>${esc(titulo)}</h2>${sub ? `<p class="sub">${esc(sub)}</p>` : ""}<div class="imgw">${img ? `<img class="nota" src="${img}">` : ph("Inserir imagem")}</div>`;
+
+      // ---------- desempenho dos discentes ----------
+      const mediaTxt = (dp) =>
+        ((dp.estatisticas || []).find((s) => s.rotulo === "MÉDIA") || {}).valor ||
+        f2(dp.media_num);
+
+      function tituloHist(dp, fallback) {
+        const h = dp && dp.hist;
+        if (!h || h.length < 2)
+          return dp ? "Sem histórico dos 3 últimos anos para comparar" : fallback;
+        const [pr, pv] = h[h.length - 2],
+          av = h[h.length - 1][1];
+        const d = Math.round((r2(av) - r2(pv)) * 100) / 100;
+        if (Math.abs(d) < 0.1)
+          return `Média da turma estável: ${f2(av)} contra ${f2(pv)} em ${pr}`;
+        return `Média da turma ${d > 0 ? "subiu" : "caiu"} ${f2(Math.abs(d))} em relação a ${pr}`;
+      }
+
+      function perfSlides(I, sg) {
+        const dp = I.desempenho || null,
+          notas = I.notas || NOTAS0,
+          out = [],
+          sec = `Curso ${sg} · Média final`;
+        const k = dp ? dp.abaixo_corte_num : 0,
+          M = dp ? dp.total_alunos : 0,
+          corte = dp ? dp.corte || META : META;
+
+        if (dp && Array.isArray(dp.estatisticas) && dp.estatisticas.length) {
+          const linhas = dp.estatisticas
+            .map(
+              (st) =>
+                `<tr${/^NOTAS ABAIXO DE/.test(st.rotulo) && Number(st.valor) > 0 ? ' class="warn"' : ""}><td>${esc(st.rotulo)}</td><td>${esc(st.valor)}</td></tr>`,
+            )
+            .join("");
+          const titulo =
+            k > 0
+              ? `Média da turma ${mediaTxt(dp)}; ${k} de ${M} abaixo de ${f1(corte)}`
+              : `Média da turma ${mediaTxt(dp)}; nenhum aluno abaixo de ${f1(corte)}`;
+          out.push(
+            `<div class="sec">${esc(sec)}</div><h2>${esc(titulo)}</h2><p class="sub">Desempenho dos discentes · ${M} discentes</p><table class="perf-table"><thead><tr><th>Indicador</th><th>Resultado</th></tr></thead><tbody>${linhas}</tbody></table>`,
+          );
+        } else if (notas[0] && notas[0].imagem) {
+          out.push(imgSlide(sec, notas[0].titulo || "Desempenho dos Discentes", "", notas[0].imagem));
+        } else if (DRAFT) {
+          out.push(`<div class="sec">${esc(sec)}</div><h2>Desempenho dos Discentes</h2>${ph("A preencher")}`);
+        }
+
+        const n1 = notas[1] || NOTAS0[1],
+          n2 = notas[2] || NOTAS0[2];
+        if (n1.imagem) {
+          const t = dp
+            ? k > 0
+              ? `${k} de ${M} alunos ficaram abaixo de ${f1(corte)}`
+              : `Nenhum dos ${M} alunos ficou abaixo de ${f1(corte)}`
+            : n1.titulo;
+          out.push(imgSlide(sec, t, dp ? "Frequência de notas da turma · médias finais" : "", n1.imagem));
+        } else if (DRAFT) {
+          out.push(imgSlide(sec, n1.titulo, "", ""));
+        }
+        if (n2.imagem) {
+          out.push(
+            imgSlide(sec, tituloHist(dp, n2.titulo), dp ? "Média da turma por período · últimos 3 anos" : "", n2.imagem),
+          );
+        } else if (DRAFT) {
+          out.push(imgSlide(sec, n2.titulo, "", ""));
+        }
+        return out;
+      }
+
+      function parecerSlides(I, sg) {
+        const PP = pagesOf(
+          Array.isArray(I.parecer)
+            ? I.parecer
+            : String(I.parecer || "")
+                .split(/\n+/)
+                .filter((x) => x.trim()),
+          1500,
+        );
+        if (!PP.length)
+          return DRAFT
+            ? [`<div class="sec">Curso ${esc(sg)}</div><h2>Parecer da Coordenação Técnica</h2>${ph("A preencher")}`]
+            : [];
+        return PP.map(
+          (p, i, A) =>
+            `<div class="sec">Curso ${esc(sg)}${A.length > 1 ? " · " + (i + 1) + "/" + A.length : ""}</div><h2>Parecer da Coordenação Técnica</h2><ul class="ul2">${p.map((x) => `<li>${esc(x)}</li>`).join("")}</ul>`,
+        );
+      }
+
+      // ---------- montagem ----------
+      const rankRow = (r) => {
+        if (r.m == null)
+          return `<div class="row"><div class="l">${esc(r.n)}</div><div class="none">Sem respostas</div><div></div><div class="n">—</div></div>`;
+        const peq = r.T < SMALL_N;
+        return `<div class="row"><div class="l">${esc(r.n)}</div><div class="track"><div class="fill${r.m < META ? " w" : ""}" style="width:${Math.min(100, r.m * 10)}%"></div><i class="ref" style="left:${META * 10}%"></i></div>${chip(r.m)}<div class="n${peq ? " wn" : ""}">n=${r.T}${peq ? " · base pequena" : ""}</div></div>`;
+      };
+      const stackRow = (r) =>
+        `<div class="row"><div class="l">${esc(r.n)}</div>${bar(r.v, S10, SL, true)}${chip(r.m)}<div class="n${r.T < SMALL_N ? " wn" : ""}">${r.T ? "n=" + r.T : "—"}</div></div>`;
+      const byMean = (a, b) => (a.m == null) - (b.m == null) || (a.m ?? 0) - (b.m ?? 0);
+      const MAXR = 8; // itens mostrados no ranking do fluxo principal
+      const PORPAG = 9; // itens por página no apêndice
 
       function build(k) {
-        const c = get(k),
-          R = [];
+        const c = get(k);
         if (!c) return [];
-        const tipo = c.t == "P" ? "Curso presencial" : "Curso EAD";
-        const nome =
-          k == "ALL_P"
-            ? "Consolidado – Cursos presenciais"
-            : k == "ALL_E"
-              ? "Consolidado – Cursos EAD"
-              : c.i.nome || k;
-        const cover0 = `<div class="cover" style="display:flex;flex-direction:column;flex:1;justify-content:center"><div class="sec">Pesquisa de satisfação · 2026</div><h1>${nome}</h1><p>${tipo}${c.k ? " · " + c.k + " cursos" : ""}</p><div class="kpis"><div class="kpi"><b>${c.n}</b><span>respostas submetidas</span></div></div></div>`;
+        const isAll = !!c.k,
+          I = c.i || {},
+          sg = I.sigla || k;
+        const R = [],
+          AP = [],
+          todos = [];
 
+        // perguntas de múltipla escolha
         for (const q of Q) {
-          if (q[5] && q[5] != c.t) continue;
-          const cnt = c.q[q[0]];
-          if (!cnt) continue;
-          const T = cnt.reduce((a, b) => a + b, 0);
-
-          let labs = [...q[3]];
-          let cols = [...q[4]];
-          // Inverte rótulos e cores para todas as modalidades nas questões especificadas
-          if (
-            [
-              "1.1.1",
-              "1.1.3",
-              "2.1",
-              "2.2",
-              "2.3",
-              "2.4",
-              "2.7",
-              "3.1",
-              "3.2",
-            ].includes(q[0])
-          ) {
-            labs.reverse();
-            cols.reverse();
-          }
-
+          const qi = qinfo(c, q[0]);
+          if (!qi) continue;
+          const { labs, cols, cnt, T } = qi;
+          const a = achado(c, q[0]);
+          const titulo = a ? `${a.x} ${a.frase}` : "Sem respostas para esta pergunta";
           R.push([
             (c.qo || {})[q[0]] || 0,
-            `<div class="sec">${q[2]} · ${q[0]}</div><h2>${q[1]}</h2><div class="big">${bar(cnt, cols, labs)}</div><table>${labs.map((l, i) => `<tr><td><i style="display:inline-block;width:.8rem;height:.8rem;border-radius:3px;background:${cols[i]};margin-right:.6rem"></i>${l}</td><td>${cnt[i]}</td><td>${T ? ((cnt[i] / T) * 100).toFixed(1).replace(".", ",") : 0}%</td></tr>`).join("")}</table><div class="note">Base: ${T} respostas.</div>`,
+            `<div class="sec">${esc(q[2])} · ${q[0]}</div><h2>${esc(titulo)}</h2><p class="sub">${esc(q[1])} · ${T < SMALL_N ? `<b class="wn">base pequena (n=${T})</b>` : `n=${T}`}</p><div class="big">${bar(cnt, cols, labs, false)}</div><div class="opts">${labs.map((l, i) => opt(l, cols[i], cnt[i], T)).join("")}</div>`,
           ]);
         }
 
+        // itens de escala (1 a 10): ranking no fluxo, distribuição completa no apêndice
         let o = 0;
-        const gruposAspectos = c.t == "P" ? GP : GE;
-        for (const g of gruposAspectos) {
+        for (const g of c.t == "P" ? GP : GE) {
           const items = c.s.slice(o, o + g[2]);
           o += g[2];
           if (!items.length) continue;
+          const rows = items
+            .map(([n, v]) => ({ n: nm(n), v, m: mean10(v), T: sum(v.slice(1)), g: g[0] }))
+            .sort(byMean);
+          todos.push(...rows);
+          const ord = (items[0] || [])[2] || 0;
+          const com = rows.filter((r) => r.m != null);
+          const abaixo = com.filter((r) => r.m < META).length;
+          const pior = com[0];
+          const mostradas = rows.slice(0, MAXR);
+          const titulo = !com.length
+            ? `${g[0]}: sem respostas`
+            : abaixo === 0
+              ? `Todos os ${com.length} itens têm média igual ou acima de ${f1(META)}`
+              : `${abaixo} de ${com.length} itens ${abaixo === 1 ? "tem" : "têm"} média abaixo de ${f1(META)}`;
+          const sub =
+            `${g[1]} · escala de 1 a 10` +
+            (pior ? ` · menor média: ${pior.n} (${f1(pior.m)})` : "") +
+            (rows.length > mostradas.length
+              ? ` · ${mostradas.length} menores médias de ${rows.length} itens`
+              : "");
           R.push([
-            (items[0] || [])[2] || 0,
-            `<div class="sec">${g[0]}</div><h2>${g[1]}</h2><div class="rows">${items
-              .map(([n, v]) => {
-                const T = v.reduce((a, b) => a + b, 0);
-                return `<div class="row"><div class="l">${nm(n)}</div>${bar(v, S10, SL)}<div class="n">${T ? "n=" + T : "—"}</div></div>`;
-              })
-              .join(
-                "",
-              )}</div>${leg(S10, ["Não observado", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"])}`,
+            ord,
+            `<div class="sec">${esc(g[0])}</div><h2>${esc(titulo)}</h2><p class="sub">${esc(sub)}</p><div class="rows"><div class="row rh"><div></div><div>MÉDIA · LINHA = ${f1(META)}</div><div></div><div>n (COM NOTA)</div></div>${mostradas.map(rankRow).join("")}</div>`,
           ]);
+          const parts = [];
+          for (let i = 0; i < rows.length; i += PORPAG) parts.push(rows.slice(i, i + PORPAG));
+          parts.forEach((p, i) =>
+            AP.push(
+              `<div class="sec">Apêndice · ${esc(g[0])}${parts.length > 1 ? " · " + (i + 1) + "/" + parts.length : ""}</div><h2>Distribuição das notas por item</h2><p class="sub">${esc(g[1])} · do menor para o maior valor médio · percentuais incluem "Não observado"</p><div class="rows">${p.map(stackRow).join("")}</div>${leg(S10, SL)}`,
+            ),
+          );
           if (c.t == "P" && g[0] == "Instalações e serviços" && mult(c).length)
             R.push([(c.qo || {})["4.2"] || 0, defic(c)]);
         }
 
         R.sort((a, b) => a[0] - b[0]);
         const att = {},
-          X = [];
+          X = [],
+          APc = [];
+        const trunc = (s, n = 320) =>
+          s.length > n ? s.slice(0, n).replace(/\s+\S*$/, "") + "…" : s;
         for (const [k2, [ti, l, od]] of Object.entries(c.c || {})) {
           if (!l.length) continue;
-          if (FIX.includes(k2))
-            pagesOf(l, 1500).forEach((p, i, A) =>
-              X.push([
-                od,
-                `<div class="sec">Comentários${A.length > 1 ? " · " + (i + 1) + "/" + A.length : ""}</div><h2>${esc(ti)}</h2><div class="cm all"><ul>${p.map((x) => `<li>${esc(x)}</li>`).join("")}</ul></div>`,
-              ]),
-            );
-          else {
+          if (FIX.includes(k2)) {
+            const top =
+              l.length <= 3
+                ? l
+                : l
+                    .slice()
+                    .sort((a, b) => b.length - a.length)
+                    .slice(0, 3);
+            const nota =
+              l.length === 1
+                ? "O único comentário"
+                : l.length <= 3
+                  ? `Todos os ${l.length} comentários`
+                  : `Os 3 mais detalhados de ${l.length} · íntegra no apêndice`;
+            X.push([
+              od,
+              `<div class="sec">Comentários</div><h2>${l.length} ${l.length === 1 ? "comentário" : "comentários"} nesta pergunta</h2><p class="sub">${esc(ti)}</p><div class="qts">${top.map((x) => `<blockquote>${esc(trunc(x))}</blockquote>`).join("")}</div><div class="note">${esc(nota)}</div>`,
+            ]);
+            if (l.length > 3 || l.some((x) => x.length > 320))
+              pagesOf(l, 1800).forEach((p, i, A) =>
+                APc.push(
+                  `<div class="sec">Apêndice · Comentários${A.length > 1 ? " · " + (i + 1) + "/" + A.length : ""}</div><h2>${esc(ti)}</h2><div class="cm all"><ul>${p.map((x) => `<li>${esc(x)}</li>`).join("")}</ul></div>`,
+                ),
+              );
+          } else {
             let j = 0;
             R.forEach((r, n) => {
               if (r[0] <= od) j = n;
@@ -726,71 +1210,76 @@
         R.forEach((r, n) => X.push([r[0], r[1] + (att[n] ? pan(att[n]) : "")]));
         X.sort((a, b) => a[0] - b[0]);
         const RH = X.map((x) => x[1]);
-        if (c.k) return [cover0, ...RH];
+        const apendice = [...AP, ...APc];
 
-        const I = c.i || {},
-          sg = I.sigla || k;
-        const N = I.notas || [
-          { titulo: "Desempenho dos Discentes" },
-          { titulo: "Frequência de Notas da Turma" },
-          {
-            titulo:
-              "Histograma do Desempenho da Turma em relação aos 3 últimos anos",
-          },
-        ];
-        const cap = capa(c, I, k);
-        const slidesNotas =
-          c.t == "P"
-            ? (
-                I.notas || [
-                  { titulo: "Desempenho dos Discentes" },
-                  { titulo: "Frequência de Notas da Turma" },
-                  {
-                    titulo:
-                      "Histograma do Desempenho da Turma em relação aos 3 últimos anos",
-                  },
-                ]
-              ).map(
-                (n) =>
-                  `<div class="sec">Curso ${esc(sg)} · Média final</div><h2>${esc(n.titulo)}</h2><div class="imgw">${n.imagem ? `<img class="nota" src="${n.imagem}">` : ph("Inserir imagem")}</div>`,
-              )
-            : [];
-        const PP = pagesOf(
-          Array.isArray(I.parecer)
-            ? I.parecer
-            : String(I.parecer || "")
-                .split(/\n+/)
-                .filter((x) => x.trim()),
-          1500,
-        );
-        const parecer = (PP.length ? PP : [[]]).map(
-          (p, i, A) =>
-            `<div class="sec">Curso ${esc(sg)}${A.length > 1 ? " · " + (i + 1) + "/" + A.length : ""}</div><h2>Parecer Coordenação Técnica</h2>${p.length ? `<ul class="ul2">${p.map((x) => `<li>${esc(x)}</li>`).join("")}</ul>` : ph("A preencher")}`,
-        );
+        // resumo: números que saem dos mesmos dados dos slides
+        const dp = !isAll && c.t == "P" ? I.desempenho || null : null;
+        const cards = [];
+        if (dp)
+          cards.push({
+            v: mediaTxt(dp),
+            l: `média da turma · ${dp.abaixo_corte_num} de ${dp.total_alunos} abaixo de ${f1(dp.corte || META)}`,
+          });
+        for (const id of ["1.1.1", "3.2"]) {
+          const a = achado(c, id);
+          if (a) cards.push({ v: a.x, l: a.frase });
+        }
+        const pior = todos.filter((r) => r.m != null).sort(byMean)[0];
+        if (pior) cards.push({ v: f1(pior.m), l: `menor média: ${pior.n} (${pior.g})` });
 
-        return [
-          cap,
-          `<div class="sec">Curso ${esc(sg)}</div><h2>Coordenação e dados do curso</h2>` +
-            (Object.entries(I.coordenacao || {})
-              .filter(([a, b]) => String(b).trim())
-              .map(
-                ([a, b]) => `<div class="kv"><b>${esc(a)}:</b> ${esc(b)}</div>`,
-              )
-              .join("") || ph("A preencher")),
-          ...slidesNotas,
-          ...RH,
-          ...parecer,
-          `<div class="sec">Ações demandadas</div><h2>Ações demandadas</h2>${(I.acoes || []).length ? `<ul class="ul2">${I.acoes.map((x) => `<li>• ${esc(x)}</li>`).join("")}</ul>` : ph("A preencher")}`,
-          cap,
-        ];
+        const capa = isAll
+          ? capaHTML({
+              sec: "Pesquisa de satisfação · 2026",
+              titulo: k == "ALL_P" ? "Consolidado – Cursos presenciais" : "Consolidado – Cursos EAD",
+              l1: `${c.k} cursos · ${c.n} respostas`,
+            })
+          : capaHTML({
+              sec: `Avaliação dos Cursos ${c.t == "P" ? "Presenciais" : "EAD"}`,
+              titulo: I.nome || k,
+              l1: I.edicao,
+              l2: I.periodo_local,
+              l3:
+                Object.entries(I.coordenacao || {})
+                  .filter(([, b]) => String(b).trim())
+                  .map(([a, b]) => `${a}: ${b}`)
+                  .join(" · ") || "",
+            });
+
+        const secs = [];
+        if (!isAll && c.t == "P") {
+          const ps = perfSlides(I, sg);
+          if (ps.length) secs.push({ t: "Desempenho dos discentes", s: ps });
+        }
+        secs.push({ t: "Pesquisa de satisfação", s: RH });
+        if (!isAll) {
+          const pa = parecerSlides(I, sg);
+          if (pa.length) secs.push({ t: "Parecer da Coordenação Técnica", s: pa });
+        }
+        const nomes = secs.map((s) => s.t).concat(apendice.length ? ["Apêndice"] : []);
+        const divs = nomes.length >= 2;
+
+        const out = [capa, agendaHTML(nomes)];
+        secs.forEach((s, i) => {
+          if (divs) out.push(dividerHTML(i + 1, s.t));
+          out.push(...s.s);
+        });
+        const acoes = isAll ? [] : I.acoes || [];
+        out.push(stmtHTML(cards, acoes, !isAll && (acoes.length > 0 || DRAFT)));
+        if (apendice.length) {
+          if (divs) out.push(dividerHTML(nomes.length, "Apêndice"));
+          out.push(...apendice);
+        }
+        return out;
       }
 
+      const isDark = (s) => /^<div class="(capa|sdiv|stmt)"/.test(s);
       let cur = "ALL_P",
         sl = [],
         ix = 0;
       function render() {
-        document.getElementById("m").innerHTML =
-          `<div style="display:flex;flex-direction:column;flex:1;min-height:0">${sl[ix]}</div>`;
+        const m = document.getElementById("m");
+        m.className = isDark(sl[ix]) ? "dark" : "";
+        m.innerHTML = `<div class="sl">${sl[ix]}</div>`;
         document.getElementById("pg").textContent = ix + 1 + " / " + sl.length;
       }
       function go(d) {
@@ -802,6 +1291,10 @@
         sl = build(k);
         ix = 0;
         render();
+        // Impressão / PDF: uma página A4 paisagem por slide (montada já aqui, escondida na tela)
+        document.getElementById("pr").innerHTML = sl
+          .map((s) => `<section class="page${isDark(s) ? " dark" : ""}"><div class="sl">${s}</div></section>`)
+          .join("");
       }
 
       const sel = document.getElementById("sel");
@@ -820,7 +1313,7 @@
         if (e.key == "ArrowRight" || e.key == "PageDown" || e.key == " ") go(1);
         else if (e.key == "ArrowLeft" || e.key == "PageUp") go(-1);
         else if (e.key == "c" || e.key == "C") {
-          const p = document.querySelector(".cm:not(.all)");
+          const p = document.querySelector("#m .cm:not(.all)");
           if (p) p.hidden = !p.hidden;
         } else if (e.key == "f" || e.key == "F")
           document.fullscreenElement
