@@ -15,7 +15,7 @@
     <title>Pesquisa de Satisfação de Cursos – 2026</title>
     <style>
       :root {
-        --bg: #f4f6fa;
+        --bg: #f3f5f9;
         --bg2: #ffffff;
         --tx: #0f1f3a;
         --mu: #5b6b82;
@@ -23,12 +23,16 @@
         --navy: #00205f;
         --ac: #2f6fb5;
         --warm: #e0a21b;
-        --warmtx: #9a6200;
+        --warmtx: #8f5d00;
         --bad: #c93c3c;
         --p1: #bfe6f4;
         --p2: #fbc9b8;
         --p3: #fde5b3;
         --p4: #c9f0d5;
+        --shadow-sm:
+          0 1px 2px rgba(0, 32, 95, 0.06), 0 1px 1px rgba(0, 32, 95, 0.04);
+        --shadow-md:
+          0 6px 18px rgba(0, 32, 95, 0.08), 0 2px 4px rgba(0, 32, 95, 0.04);
         --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
       }
       * {
@@ -41,46 +45,67 @@
       body {
         background: var(--bg);
         color: var(--tx);
-        font-family: "Segoe UI", Roboto, Arial, sans-serif;
+        font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+        -webkit-font-smoothing: antialiased;
         height: 100vh;
         overflow: hidden;
         display: flex;
         flex-direction: column;
       }
+
+      /* ---------- cabeçalho ---------- */
       header {
         display: flex;
         justify-content: space-between;
         align-items: center;
         gap: 1rem;
-        padding: 0.6rem 1.4rem;
+        padding: 0.65rem clamp(1rem, 2.6vw, 2rem);
         background: var(--navy);
-        border-bottom: 1px solid rgba(255, 255, 255, 0.18);
-        font-size: 0.85rem;
-        letter-spacing: 0.04em;
-        color: #dce6f7;
+        border-bottom: 3px solid var(--warm);
+        font-size: 0.78rem;
+        font-weight: 600;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: #cfdcf2;
       }
       select {
         background: rgba(255, 255, 255, 0.1);
         color: #fff;
-        border: 1px solid rgba(255, 255, 255, 0.35);
-        border-radius: 6px;
-        padding: 0.3rem 0.5rem;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        border-radius: 8px;
+        padding: 0.35rem 0.6rem;
         font-size: 0.85rem;
+        letter-spacing: normal;
+        text-transform: none;
         max-width: 46vw;
+        cursor: pointer;
+      }
+      select:focus-visible {
+        outline: 3px solid var(--warm);
+        outline-offset: 2px;
       }
       select option,
       select optgroup {
         color: var(--tx);
         background: #fff;
       }
+
+      /* ---------- área do slide ---------- */
       main {
         position: relative;
         flex: 1;
         min-height: 0;
-        padding: 1.2rem 2rem 0.6rem;
+        overflow-y: auto;
+        padding: clamp(1rem, 2.6vh, 2.2rem) clamp(1.2rem, 4vw, 3.6rem) 0.7rem;
         display: flex;
         flex-direction: column;
-        background: var(--bg);
+        background:
+          radial-gradient(
+            1100px 520px at 100% -15%,
+            #e4ecf8 0%,
+            rgba(228, 236, 248, 0) 70%
+          ),
+          var(--bg);
       }
       main.dark,
       .page.dark {
@@ -100,35 +125,79 @@
         flex-direction: column;
         flex: 1;
         min-height: 0;
+        width: 100%;
+        max-width: 1480px;
+        margin: 0 auto;
+        animation: slide-in 420ms var(--ease-out) both;
       }
+      @keyframes slide-in {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: none;
+        }
+      }
+      @keyframes rise {
+        from {
+          opacity: 0;
+          transform: translateY(6px);
+        }
+        to {
+          opacity: 1;
+          transform: none;
+        }
+      }
+
+      /* ---------- tipografia ---------- */
       .sec {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.6rem;
         color: var(--ac);
-        font-size: 0.85rem;
-        letter-spacing: 0.12em;
+        font-size: 0.78rem;
+        letter-spacing: 0.16em;
         text-transform: uppercase;
         font-weight: 700;
       }
+      .sec::before {
+        content: "";
+        width: 1.6rem;
+        height: 2px;
+        border-radius: 2px;
+        background: currentColor;
+        opacity: 0.8;
+      }
       h1 {
-        font-size: 2.6rem;
-        line-height: 1.1;
-        margin: 0.4rem 0;
+        font-size: clamp(2rem, 3.6vw, 3.4rem);
+        font-weight: 800;
+        line-height: 1.05;
+        letter-spacing: -0.02em;
+        margin: 0.5rem 0 0.6rem;
       }
       h2 {
-        font-size: 1.7rem;
-        font-weight: 700;
-        margin: 0.3rem 0 0.25rem;
-        line-height: 1.2;
+        font-size: clamp(1.45rem, 2.4vw, 2.2rem);
+        font-weight: 750;
+        line-height: 1.18;
+        letter-spacing: -0.015em;
+        margin: 0.4rem 0 0.35rem;
+        text-wrap: balance;
       }
       .sub {
         color: var(--mu);
-        font-size: 1rem;
-        line-height: 1.3;
-        margin-bottom: 0.9rem;
+        font-size: 1.02rem;
+        line-height: 1.35;
+        margin-bottom: 1rem;
+        max-width: 72ch;
       }
       .wn {
         color: var(--warmtx);
         font-weight: 700;
       }
+
+      /* ---------- barras e linhas de ranking ---------- */
       .rows {
         flex: 1;
         min-height: 0;
@@ -143,32 +212,39 @@
         grid-template-columns: 26% 1fr 4rem 11rem;
         align-items: center;
         gap: 0.8rem;
+        padding: 0 0.2rem;
+        border-radius: 6px;
+        transition: background-color 160ms ease;
+      }
+      .row:not(.rh):hover {
+        background: rgba(47, 111, 181, 0.06);
       }
       .row .l {
-        font-size: 1rem;
+        font-size: 0.98rem;
         text-align: right;
         line-height: 1.15;
       }
       .row .n {
         font-size: 0.9rem;
         color: var(--mu);
+        font-variant-numeric: tabular-nums;
       }
       .row .n.wn {
         color: var(--warmtx);
       }
       .bar {
         display: flex;
-        gap: 2px;
+        gap: 3px;
         height: 72%;
         max-height: 2.3rem;
         position: relative;
       }
       .big {
         display: block;
-        margin: 0.9rem 0 1.1rem;
+        margin: 1.1rem 0 1.6rem;
       }
       .big .bar {
-        height: 5.6rem;
+        height: clamp(6rem, 24vh, 13rem);
         max-height: none;
       }
       .seg {
@@ -177,7 +253,7 @@
         justify-content: center;
         min-width: 0;
         position: relative;
-        border-radius: 4px;
+        border-radius: 5px;
         font-weight: 700;
         font-size: 0.85rem;
         white-space: nowrap;
@@ -199,7 +275,10 @@
         padding: 0.25rem 0.55rem;
         font-size: 0.8rem;
         font-weight: 600;
-        transition: opacity 125ms var(--ease-out), transform 125ms var(--ease-out);
+        white-space: nowrap;
+        transition:
+          opacity 125ms var(--ease-out),
+          transform 125ms var(--ease-out);
       }
       @media (hover: hover) and (pointer: fine) {
         .bar:hover .seg:not(:hover) {
@@ -213,41 +292,82 @@
           border-color: var(--ac);
         }
       }
-      @media (prefers-reduced-motion: reduce) {
-        .seg::after {
-          transform: translate(-50%, 0);
-          transition: opacity 125ms ease;
-        }
-      }
+
+      /* ---------- botões ---------- */
       button {
-        transition: transform 160ms var(--ease-out), border-color 160ms ease;
+        background: var(--bg2);
+        color: var(--tx);
+        border: 1px solid var(--tr);
+        border-radius: 999px;
+        padding: 0.4rem 1.05rem;
+        cursor: pointer;
+        font: inherit;
+        font-size: 0.9rem;
+        font-weight: 600;
+        transition:
+          transform 160ms var(--ease-out),
+          border-color 160ms ease,
+          background-color 160ms ease;
       }
       button:active {
         transform: scale(0.97);
       }
+      button:focus-visible {
+        outline: 3px solid var(--warm);
+        outline-offset: 2px;
+      }
+      footer button:last-of-type {
+        background: var(--navy);
+        border-color: var(--navy);
+        color: #fff;
+      }
+      @media (hover: hover) and (pointer: fine) {
+        footer button:last-of-type:hover {
+          background: #0a3380;
+          border-color: #0a3380;
+        }
+      }
+
+      /* ---------- opções (contagens) ---------- */
       .opts {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
-        gap: 0.7rem;
+        gap: 0.8rem;
         margin-top: 0.4rem;
       }
       .opt {
         background: var(--bg2);
         border: 1px solid var(--tr);
-        border-radius: 8px;
+        border-radius: 10px;
         border-top: 4px solid;
-        padding: 0.8rem 1rem;
+        padding: 0.85rem 1.05rem;
+        box-shadow: var(--shadow-sm);
         display: flex;
         flex-direction: column;
         gap: 0.1rem;
+        animation: rise 380ms var(--ease-out) both;
+      }
+      .opts .opt:nth-child(2) {
+        animation-delay: 50ms;
+      }
+      .opts .opt:nth-child(3) {
+        animation-delay: 100ms;
+      }
+      .opts .opt:nth-child(4) {
+        animation-delay: 150ms;
+      }
+      .opts .opt:nth-child(5) {
+        animation-delay: 200ms;
       }
       .opt span {
         color: var(--mu);
-        font-size: 1rem;
+        font-size: 0.98rem;
       }
       .opt b {
-        font-size: 2.4rem;
+        font-size: clamp(2.2rem, 3.2vw, 2.9rem);
+        line-height: 1.1;
         font-variant-numeric: tabular-nums;
+        letter-spacing: -0.02em;
       }
       .opt b i {
         font-size: 1.1rem;
@@ -268,7 +388,7 @@
         font-weight: 700;
         font-size: 0.95rem;
         border-radius: 999px;
-        padding: 0.1rem 0.6rem;
+        padding: 0.1rem 0.65rem;
         font-variant-numeric: tabular-nums;
       }
       .chip.ok {
@@ -282,9 +402,11 @@
       .rh {
         flex: 0 0 auto;
         min-height: 0;
-        font-size: 0.8rem;
+        font-size: 0.74rem;
+        font-weight: 600;
         color: var(--mu);
-        letter-spacing: 0.08em;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
       }
       .track {
         position: relative;
@@ -296,13 +418,13 @@
       .fill {
         height: 100%;
         border-radius: 999px;
-        background: var(--ac);
+        background: linear-gradient(90deg, #4b86c8, var(--ac));
       }
       .fill.w {
-        background: var(--warm);
+        background: linear-gradient(90deg, #efb845, var(--warm));
       }
       .fill.w2 {
-        background: rgba(224, 162, 27, 0.4);
+        background: rgba(224, 162, 27, 0.45);
       }
       .ref {
         position: absolute;
@@ -334,25 +456,28 @@
         margin-right: 0.35rem;
         vertical-align: -0.1rem;
       }
+
+      /* ---------- tabela de desempenho ---------- */
       .perf-table {
         width: 100%;
         max-width: 56rem;
         border-collapse: separate;
         border-spacing: 0;
-        margin-top: 0.2rem;
+        margin-top: 0.4rem;
         background: var(--bg2);
         border: 1px solid var(--tr);
-        border-radius: 8px;
+        border-radius: 10px;
         overflow: hidden;
+        box-shadow: var(--shadow-sm);
         font-size: 1rem;
       }
       .perf-table th {
         background: #e9eff8;
         color: var(--navy);
         text-align: left;
-        padding: 0.45rem 0.85rem;
-        font-size: 0.8rem;
-        letter-spacing: 0.08em;
+        padding: 0.5rem 0.9rem;
+        font-size: 0.74rem;
+        letter-spacing: 0.1em;
         text-transform: uppercase;
         border-bottom: 2px solid var(--ac);
       }
@@ -361,7 +486,7 @@
         text-align: right;
       }
       .perf-table td {
-        padding: 0.38rem 0.85rem;
+        padding: 0.42rem 0.9rem;
         border-bottom: 1px solid var(--tr);
       }
       .perf-table tr:nth-child(even) td {
@@ -379,6 +504,8 @@
         background: var(--p3);
         color: var(--warmtx);
       }
+
+      /* ---------- capa ---------- */
       .capa {
         display: flex;
         flex-direction: column;
@@ -386,48 +513,84 @@
         justify-content: center;
         align-items: center;
         text-align: center;
+        padding: 0 4vw;
       }
       .capa .logo {
         display: block;
-        height: 9rem;
-        max-width: 180px;
+        height: 9.4rem;
+        max-width: 240px;
         width: auto;
         object-fit: contain;
-        margin: 0 auto 1.2rem;
-        background: #fff;
-        padding: 0.7rem;
-        border-radius: 16px;
+        margin: 0 auto 1.6rem;
+        background: none;
+        padding: 0;
+        border-radius: 0;
+        box-shadow: none;
+        filter: drop-shadow(0 10px 14px rgba(0, 0, 0, 0.45))
+          drop-shadow(0 2px 3px rgba(0, 0, 0, 0.35));
       }
       .capa h1 {
         width: 100%;
+        max-width: 22ch;
+        margin-inline: auto;
         text-align: center;
+        font-size: clamp(2.2rem, 4.4vw, 4rem);
+        text-wrap: balance;
       }
       .capa p {
         width: 100%;
+        max-width: 56ch;
         text-align: center;
         color: var(--mu);
-        font-size: 1.15rem;
-        margin-top: 0.4rem;
+        font-size: 1.12rem;
+        line-height: 1.4;
+        margin: 0.4rem auto 0;
       }
       .capa p.org {
-        margin-top: 1.4rem;
-        font-size: 1rem;
+        margin-top: 2.2rem;
+        font-size: 0.82rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        opacity: 0.8;
       }
+
+      /* ---------- roteiro ---------- */
       .ag {
         list-style: none;
         padding: 0;
-        margin: 0.8rem 0 0;
+        margin: 1.8rem 0 0;
         display: flex;
         flex-direction: column;
-        gap: 0.9rem;
+        gap: 1rem;
+        max-width: 52rem;
       }
       .ag li {
         display: flex;
         align-items: center;
-        gap: 1rem;
-        font-size: 1.5rem;
+        gap: 1.1rem;
+        font-size: clamp(1.3rem, 2vw, 1.7rem);
+        font-weight: 500;
+        padding-bottom: 1rem;
+        border-bottom: 1px solid var(--tr);
+        animation: rise 420ms var(--ease-out) both;
+      }
+      .ag li:nth-child(2) {
+        animation-delay: 60ms;
+      }
+      .ag li:nth-child(3) {
+        animation-delay: 120ms;
+      }
+      .ag li:nth-child(4) {
+        animation-delay: 180ms;
+      }
+      .ag li:nth-child(5) {
+        animation-delay: 240ms;
+      }
+      .ag li:nth-child(6) {
+        animation-delay: 300ms;
       }
       .ag b {
+        flex: 0 0 2.6rem;
         width: 2.6rem;
         height: 2.6rem;
         border-radius: 50%;
@@ -435,26 +598,39 @@
         align-items: center;
         justify-content: center;
         color: var(--navy);
-        font-size: 1.3rem;
+        font-size: 1.2rem;
+        box-shadow: var(--shadow-sm);
       }
+
+      /* ---------- divisores de seção e resumo ---------- */
       .sdiv {
         flex: 1;
         display: flex;
         flex-direction: column;
         justify-content: center;
-        gap: 1rem;
+        align-items: flex-start;
+        gap: 1.2rem;
+        max-width: 60rem;
+        margin: 0 auto;
+        width: 100%;
       }
       .sdiv .num {
-        width: 4.5rem;
-        height: 4.5rem;
+        width: 4.6rem;
+        height: 4.6rem;
         border-radius: 50%;
         background: var(--p3);
         color: var(--navy);
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 2.4rem;
+        font-size: 2.3rem;
         font-weight: 800;
+        box-shadow: 0 8px 22px rgba(0, 0, 0, 0.2);
+      }
+      .sdiv h1 {
+        font-size: clamp(2.2rem, 4.6vw, 4.2rem);
+        max-width: 20ch;
+        margin: 0;
       }
       .stmt {
         flex: 1;
@@ -467,30 +643,43 @@
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
         gap: 1rem;
+        margin-top: 1.4rem;
       }
       .card {
-        border-radius: 12px;
-        padding: 1rem 1.2rem;
+        border-radius: 14px;
+        padding: 1.1rem 1.3rem 1.2rem;
         color: var(--navy);
         display: flex;
         flex-direction: column;
-        gap: 0.35rem;
+        gap: 0.4rem;
+        box-shadow: 0 10px 24px rgba(0, 0, 0, 0.16);
+        animation: rise 440ms var(--ease-out) both;
+      }
+      .cards .card:nth-child(2) {
+        animation-delay: 70ms;
+      }
+      .cards .card:nth-child(3) {
+        animation-delay: 140ms;
+      }
+      .cards .card:nth-child(4) {
+        animation-delay: 210ms;
       }
       .card b {
-        font-size: 2.6rem;
+        font-size: 2.7rem;
         line-height: 1;
+        letter-spacing: -0.02em;
         font-variant-numeric: tabular-nums;
       }
       .card span {
-        font-size: 1.05rem;
-        line-height: 1.25;
+        font-size: 1.02rem;
+        line-height: 1.3;
       }
       .ul2 {
         list-style: none;
         padding: 0;
         margin: 0.4rem 0 0 0.2rem;
-        font-size: 1.15rem;
-        line-height: 1.45;
+        font-size: 1.12rem;
+        line-height: 1.5;
       }
       .ul2 li {
         margin: 0.3rem 0;
@@ -499,10 +688,12 @@
         border: 2px dashed var(--tr);
         color: var(--mu);
         padding: 0.8rem 1rem;
-        border-radius: 8px;
+        border-radius: 10px;
         font-style: italic;
         margin: 0.4rem 0;
       }
+
+      /* ---------- imagens dos gráficos ---------- */
       .imgw {
         flex: 1;
         min-height: 0;
@@ -516,28 +707,33 @@
         object-fit: contain;
         background: var(--bg2);
         border: 1px solid var(--tr);
-        border-radius: 8px;
-        padding: 0.4rem;
+        border-radius: 12px;
+        padding: 0.6rem;
+        box-shadow: var(--shadow-sm);
       }
+
+      /* ---------- comentários ---------- */
       .qts {
         display: flex;
         flex-direction: column;
-        gap: 0.8rem;
+        gap: 1.1rem;
         flex: 1;
         min-height: 0;
         overflow: auto;
+        padding: 0.4rem 0.2rem 0.4rem;
       }
       blockquote {
         background: var(--bg2);
         border: 1px solid var(--tr);
-        border-left: 5px solid var(--ac);
-        border-radius: 8px;
-        padding: 0.8rem 1.1rem;
-        font-size: 1.1rem;
-        line-height: 1.4;
+        border-left: 4px solid var(--ac);
+        border-radius: 10px;
+        padding: 1.05rem 1.4rem;
+        font-size: clamp(1.1rem, 1.5vw, 1.35rem);
+        line-height: 1.45;
+        box-shadow: var(--shadow-sm);
       }
       .cb {
-        font-size: 0.9rem;
+        font-size: 0.85rem;
         color: var(--ac);
         padding-top: 0.3rem;
       }
@@ -550,12 +746,12 @@
         background: #fff;
         color: var(--tx);
         border: 1px solid var(--ac);
-        border-radius: 8px;
-        padding: 1rem 1.4rem;
+        border-radius: 12px;
+        padding: 1.1rem 1.5rem;
         overflow: auto;
         font-size: 1rem;
-        line-height: 1.35;
-        box-shadow: 0 8px 30px rgba(0, 32, 95, 0.18);
+        line-height: 1.4;
+        box-shadow: 0 14px 40px rgba(0, 32, 95, 0.2);
       }
       .cm.all {
         position: static;
@@ -581,28 +777,151 @@
       .note {
         font-size: 0.9rem;
         color: var(--mu);
-        padding-top: 0.2rem;
+        padding-top: 0.3rem;
       }
+
+      /* ---------- rodapé ---------- */
       footer {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: 0.4rem 1.4rem;
-        font-size: 0.85rem;
+        gap: 1rem;
+        padding: 0.55rem clamp(1rem, 2.6vw, 2rem);
+        font-size: 0.84rem;
+        color: var(--mu);
+        background: var(--bg2);
+        border-top: 1px solid var(--tr);
+      }
+      footer #pg {
+        font-variant-numeric: tabular-nums;
+        font-weight: 700;
+        color: var(--tx);
+      }
+
+      .ata {
+        flex: 1;
+        min-height: 0;
+        overflow: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 0.7rem;
+        padding: 0.2rem 0.2rem 0.4rem;
+      }
+      .ata-bar {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 0.5rem 0.6rem;
+      }
+      .ata-bar label {
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+        font-size: 0.9rem;
         color: var(--mu);
       }
-      button {
-        background: var(--bg2);
-        color: var(--tx);
+      .ata-date {
+        font: inherit;
+        font-size: 0.9rem;
+        padding: 0.3rem 0.5rem;
         border: 1px solid var(--tr);
         border-radius: 6px;
-        padding: 0.3rem 0.9rem;
-        cursor: pointer;
-        font-size: 0.9rem;
+        background: var(--bg2);
+        color: var(--tx);
+      }
+      .ata-meta {
+        display: none;
+        font-size: 0.95rem;
+        color: var(--mu);
+        font-weight: 600;
+      }
+      .ata-t {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0;
+        background: var(--bg2);
+        border: 1px solid var(--tr);
+        border-radius: 10px;
+        overflow: hidden;
+        font-size: 1rem;
+        box-shadow: var(--shadow-sm);
+      }
+      .ata-t th {
+        background: #e9eff8;
+        color: var(--navy);
+        text-align: left;
+        padding: 0.5rem 0.8rem;
+        font-size: 0.74rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        border-bottom: 2px solid var(--ac);
+      }
+      .ata-t td {
+        padding: 0.4rem 0.8rem;
+        border-bottom: 1px solid var(--tr);
+        vertical-align: top;
+      }
+      .ata-t tr:last-child td {
+        border-bottom: none;
+      }
+      .ata-t td:nth-child(1) {
+        width: 3rem;
+        font-weight: 700;
+        color: var(--navy);
+      }
+      .ata-t td:nth-child(2) {
+        width: 52%;
+      }
+      .ata-t td:nth-child(3) {
+        width: 26%;
+      }
+      .ata-t td:nth-child(4) {
+        width: 11rem;
+      }
+      .ata-t td:nth-child(5),
+      .ata-t th:nth-child(5) {
+        width: 2.6rem;
+        text-align: center;
+        padding: 0.3rem;
+      }
+      .ata-ed {
+        min-height: 1.6em;
+        outline: none;
+        line-height: 1.35;
+        border-radius: 4px;
+        padding: 0.1rem 0.25rem;
+        white-space: pre-wrap;
+      }
+      .ata-ed:empty::before {
+        content: "…";
+        color: var(--mu);
+      }
+      .ata-ed:focus,
+      .ata-date:focus,
+      .ata-bar input:focus {
+        outline: 2px solid var(--warm);
+        outline-offset: 1px;
+      }
+      .ata-t td button {
+        padding: 0.05rem 0.5rem;
+        font-size: 0.85rem;
       }
       #pr {
         display: none;
       }
+
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          animation: none !important;
+          transition-duration: 0ms !important;
+        }
+        .seg::after {
+          transform: translate(-50%, 0);
+        }
+      }
+
       @media print {
         @page {
           size: A4 landscape;
@@ -641,8 +960,24 @@
         .page.dark {
           background: var(--navy);
         }
+        .page .sl,
+        .page .sl * {
+          animation: none !important;
+        }
         .cb {
           display: none;
+        }
+        .cm:not(.all) {
+          display: none !important;
+        }
+        .no-print {
+          display: none !important;
+        }
+        .ata-meta {
+          display: block !important;
+        }
+        .ata-ed:empty::before {
+          content: none;
         }
       }
     </style>
@@ -669,7 +1004,14 @@
       const PAST = ["#bfe6f4", "#fbc9b8", "#fde5b3", "#c9f0d5"];
 
       // Azul = favorável, âmbar/laranja/vermelho = pede atenção, cinza = não observado
-      const G = ["#c93c3c", "#e4762f", "#e0a21b", "#a5c0e6", "#5b8fd0", "#1f4e99"],
+      const G = [
+          "#c93c3c",
+          "#e4762f",
+          "#e0a21b",
+          "#a5c0e6",
+          "#5b8fd0",
+          "#1f4e99",
+        ],
         GR = "#9aa6b5";
       const S10 = [
         GR,
@@ -688,105 +1030,110 @@
         "Não observado",
         ...Array.from({ length: 10 }, (_, i) => String(i + 1)),
       ];
-      const REV = ["1.1.1", "1.1.3", "2.1", "2.2", "2.3", "2.4", "2.7", "3.1", "3.2"];
-
-      const Q = [
-        [
-          "1.1.1",
-          "Em relação aos objetivos gerais, o desenvolvimento do curso:",
-          "Objetivos",
-          ["Contribuiu", "Contribuiu parcialmente", "Não contribuiu", "Não foi possível avaliar"],
-          [G[5], G[2], G[0], GR],
-        ],
-        [
-          "1.1.3",
-          "Você acredita que o curso:",
-          "Objetivos",
-          ["Muita aplicabilidade", "Pouca aplicabilidade", "Apenas ampliou conhecimentos", "Não forneceu bases"],
-          [G[5], G[2], G[1], G[0]],
-        ],
-        [
-          "2.1",
-          "Quanto à duração do curso, você considera que foi:",
-          "Currículo",
-          ["Excessiva", "Suficiente", "Insuficiente"],
-          [G[0], G[5], G[2]],
-        ],
-        [
-          "2.2",
-          "A escolha das disciplinas do curso foi:",
-          "Currículo",
-          ["Excelente", "Boa", "Regular", "Ruim", "Não foi possível avaliar"],
-          [G[5], G[4], G[2], G[0], GR],
-        ],
-        [
-          "2.3",
-          "A organização possibilitou uma sequência racional das disciplinas, facilitando o aprendizado?",
-          "Currículo",
-          ["A melhor possível", "Boa", "Regular", "Inadequada", "Sem sequência lógica"],
-          [G[5], G[4], G[2], G[1], G[0]],
-        ],
-        [
-          "2.4",
-          "O conteúdo curricular do curso estava atualizado?",
-          "Currículo",
-          ["Sim", "Em partes", "Não"],
-          [G[5], G[2], G[0]],
-        ],
-        [
-          "2.7",
-          "A organização possibilitou uma sequência racional das subunidades, facilitando a aprendizagem?",
-          "Currículo",
-          ["A melhor possível", "Boa", "Regular", "Inadequada", "Não foi possível avaliar"],
-          [G[5], G[4], G[2], G[0], GR],
-          "P",
-        ],
-        [
-          "3.1",
-          "No início do curso, o seu nível de interesse era:",
-          "Expectativas",
-          ["Muito grande", "Grande", "Mediano", "Pequeno", "Muito pequeno"],
-          [G[5], G[4], G[2], G[1], G[0]],
-        ],
-        [
-          "3.2",
-          "Ao final do curso, suas expectativas iniciais foram correspondidas:",
-          "Expectativas",
-          ["Acima do esperado", "Totalmente", "Parcialmente", "Não foram"],
-          [G[5], G[4], G[2], G[0]],
-        ],
+      const REV = [
+        "1.1.1",
+        "1.1.3",
+        "2.1",
+        "2.2",
+        "2.3",
+        "2.4",
+        "2.7",
+        "3.1",
+        "3.2",
+        "5.1",
+        "5.2",
+        "5.4",
+        "5.5",
+        "5.6",
       ];
 
-      // Opções favoráveis e a frase do achado (o título nasce do dado, nunca é escrito à mão)
-      const QT = {
-        "1.1.1": [["Contribuiu"], "dizem que o curso contribuiu para os objetivos gerais"],
-        "1.1.3": [["Muita aplicabilidade"], "veem muita aplicabilidade no que o curso ensinou"],
-        "2.1": [["Suficiente"], "consideram a duração do curso suficiente"],
-        "2.2": [["Excelente", "Boa"], "avaliam a escolha das disciplinas como boa ou excelente"],
-        "2.3": [["A melhor possível", "Boa"], "avaliam a sequência das disciplinas como boa ou melhor"],
-        "2.4": [["Sim"], "consideram o conteúdo do curso atualizado"],
-        "2.7": [["A melhor possível", "Boa"], "avaliam a sequência das subunidades como boa ou melhor"],
-        "3.1": [["Muito grande", "Grande"], "começaram o curso com interesse grande ou muito grande"],
-        "3.2": [["Acima do esperado", "Totalmente"], "tiveram as expectativas atendidas totalmente ou além"],
+      const SECOES = {
+        1: "Objetivos",
+        2: "Currículo",
+        3: "Expectativas",
+        4: "Instalações e serviços",
+        5: "Instrutores",
+      };
+      const secaoDe = (id) => SECOES[String(id).split(".")[0]] || "Pesquisa";
+
+      // Esquema de cores e índices favoráveis (posição na planilha) por pergunta
+      const QCFG = {
+        "1.1.1": { cols: [G[5], G[2], G[0], GR], favIdx: [0] },
+        "1.1.3": { cols: [G[5], G[2], G[1], G[0]], favIdx: [0] },
+        2.1: { cols: [G[0], G[5], G[2]], favIdx: [1] },
+        2.2: { cols: [G[5], G[4], G[2], G[0], GR], favIdx: [0, 1] },
+        2.3: { cols: [G[5], G[4], G[2], G[1], G[0]], favIdx: [0, 1] },
+        2.4: { cols: [G[5], G[0], G[2]], favIdx: [0] },
+        2.7: { cols: [G[5], G[4], G[2], G[0], GR], favIdx: [0, 1], tipo: "P" },
+        3.1: { cols: [G[5], G[4], G[2], G[1], G[0]], favIdx: [0, 1] },
+        3.2: { cols: [G[5], G[4], G[2], G[0]], favIdx: [0, 1] },
       };
 
+      const Q_ORDEM = [
+        "1.1.1",
+        "1.1.3",
+        "2.1",
+        "2.2",
+        "2.3",
+        "2.4",
+        "2.7",
+        "3.1",
+        "3.2",
+      ];
+
+      function corOpcao(op, idx, total) {
+        const s = String(op || "").toLowerCase();
+        if (/n[ãa]o foi poss[íi]vel|n[ãa]o observado|n[ãa]o se aplica/.test(s))
+          return GR;
+        if (/excessiva/.test(s)) return G[0];
+        if (/suficiente/.test(s) && !/insuficiente/.test(s)) return G[5];
+        if (/insuficiente/.test(s)) return G[2];
+        const pal = [G[5], G[4], G[2], G[1], G[0]];
+        return pal[Math.min(idx, pal.length - 1)];
+      }
+
       const GP = [
-        ["Instalações e serviços", "Avaliação das instalações e serviços", 18, ["4.1.1"]],
+        [
+          "Instalações e serviços",
+          "Avaliação das instalações e serviços",
+          18,
+          ["4.1.1"],
+        ],
         ["Alimentação", "Rancho / alimentação", 4, ["4.3.1"]],
         ["Hotel de Trânsito", "Hotel de Trânsito", 4, ["4.4.1"]],
         ["Transporte", "Transporte", 3, ["4.5.1"]],
+        [
+          "Técnicas de ensino",
+          "Técnicas de ensino aplicadas pelo instrutor",
+          1,
+          ["5.3"],
+        ],
       ];
 
       const GE = [
-        ["Recursos e material didático", "Recursos e material didático", 6, ["4.1.2"]],
-        ["Sistemática de Avaliação", "Sistemática de Avaliação da Aprendizagem", 5, ["4.2.1"]],
+        [
+          "Recursos e material didático",
+          "Recursos e material didático",
+          6,
+          ["4.1.2"],
+        ],
+        [
+          "Sistemática de Avaliação",
+          "Sistemática de Avaliação da Aprendizagem",
+          5,
+          ["4.2.1"],
+        ],
         ["Suporte EAD", "Suporte e Plataforma EAD", 3, ["4.3.1"]],
       ];
 
       const NOTAS0 = [
         { titulo: "Desempenho dos Discentes", imagem: "" },
         { titulo: "Frequência de Notas da Turma", imagem: "" },
-        { titulo: "Histograma do Desempenho da Turma em relação aos 3 últimos anos", imagem: "" },
+        {
+          titulo:
+            "Histograma do Desempenho da Turma em relação aos 3 últimos anos",
+          imagem: "",
+        },
       ];
 
       const AC = { intraer: "INTRAER", ava: "AVA", gite: "GITE", pts: "PTS" };
@@ -805,7 +1152,9 @@
         const h = c.replace("#", "");
         const [r, g, b] = [0, 2, 4]
           .map((i) => parseInt(h.substr(i, 2), 16) / 255)
-          .map((v) => (v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4)));
+          .map((v) =>
+            v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4),
+          );
         return 0.2126 * r + 0.7152 * g + 0.0722 * b;
       };
       const DKL = lum(DK);
@@ -814,12 +1163,16 @@
         return 1.05 / (L + 0.05) >= (L + 0.05) / (DKL + 0.05) ? "#fff" : DK;
       };
       const esc = (s) =>
-        String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/"/g, "&quot;");
+        String(s)
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/"/g, "&quot;");
       const f1 = (x) => x.toFixed(1).replace(".", ",");
       const f2 = (x) => x.toFixed(2).replace(".", ",");
       const r2 = (x) => Math.round(x * 100) / 100;
       const sum = (a) => a.reduce((s, x) => s + x, 0);
-      const pct = (v, T) => (T ? ((v / T) * 100).toFixed(1).replace(".", ",") : "0,0");
+      const pct = (v, T) =>
+        T ? ((v / T) * 100).toFixed(1).replace(".", ",") : "0,0";
       const mean10 = (v) => {
         let s = 0,
           t = 0;
@@ -832,7 +1185,8 @@
       const cmBlock = (t, l) =>
         `<h3>${esc(t)} <small>(${l.length})</small></h3><ul>${l.map((x) => `<li>${esc(x)}</li>`).join("")}</ul>`;
 
-      const mult = (c) => (Array.isArray(c.m) ? c.m : Object.entries(c.m || {}));
+      const mult = (c) =>
+        Array.isArray(c.m) ? c.m : Object.entries(c.m || {});
       const SEM_DEF = /^(nenhum|n[ãa]o h[áa]|sem )/i; // opções que significam "sem deficiência"
 
       function defic(c) {
@@ -844,8 +1198,12 @@
         const titulo =
           !top || !top[1]
             ? "Nenhuma deficiência de infraestrutura foi marcada"
-            : `${top[0]} é a deficiência mais citada (${top[1]} de ${B})`;        const peq = B < SMALL_N;
-        return `<div class="sec">Instalações e serviços · 4.2</div><h2>${esc(titulo)}</h2><p class="sub">Quais as principais deficiências de infraestrutura observadas durante a realização do curso? · base: ${B} respondentes, múltipla escolha${peq ? ` · <b class="wn">base pequena</b>` : ""}</p><div class="rows">${L.map(
+            : `${top[0]} é a deficiência mais citada (${top[1]} de ${B})`;
+        const peq = B < SMALL_N;
+        const sub42 =
+          ((c.qm || {})["4.2"] || {}).enunciado ||
+          "Quais as principais deficiências de infraestrutura observadas durante a realização do curso?";
+        return `<div class="sec">Instalações e serviços · 4.2</div><h2>${esc(titulo)}</h2><p class="sub">${esc(sub42)} · base: ${B} respondentes, múltipla escolha${peq ? ` · <b class="wn">base pequena</b>` : ""}</p><div class="rows">${L.map(
           ([l, v]) => {
             const p = B ? (v / B) * 100 : 0;
             const cls = top && l === top[0] ? "w" : SEM_DEF.test(l) ? "" : "w2";
@@ -855,12 +1213,17 @@
       }
 
       function agg(t) {
-        const o = { t, n: 0, q: {}, s: null, k: 0, c: {}, m: {} };
+        const o = { t, n: 0, q: {}, qm: {}, s: null, k: 0, c: {}, m: {} };
         for (const [cd, v] of Object.entries(D))
           if (v.t == t) {
             o.n += v.n;
             o.k++;
             o.qo = o.qo || v.qo;
+            if (v.qm) {
+              for (const [qk, qv] of Object.entries(v.qm)) {
+                if (!o.qm[qk]) o.qm[qk] = qv;
+              }
+            }
             for (const [l, n] of v.m || []) o.m[l] = (o.m[l] || 0) + n;
             for (const [k, [ti, l, od]] of Object.entries(v.c || {})) {
               const e = o.c[k] || (o.c[k] = [ti, [], od]);
@@ -901,28 +1264,60 @@
         return baseObj;
       }
 
-      // Dados de uma pergunta já na ordem de exibição (rótulos e cores acompanham as contagens)
+      // Dados de uma pergunta lidos diretamente da planilha (c.qm) na ordem de exibição
       function qinfo(c, id) {
-        const q = Q.find((x) => x[0] === id);
-        if (!q || (q[5] && q[5] != c.t)) return null;
-        const cnt = c.q[id];
-        if (!cnt) return null;
-        let labs = [...q[3]],
-          cols = [...q[4]];
+        const cfg = QCFG[id] || {};
+        if (cfg.tipo && cfg.tipo != c.t) return null;
+        const cnt = c.q && c.q[id];
+        const meta = c.qm && c.qm[id];
+        if (!cnt || !meta || !Array.isArray(meta.opcoes)) return null;
+        let labs = [...meta.opcoes];
+        let cols =
+          cfg.cols && cfg.cols.length === labs.length
+            ? [...cfg.cols]
+            : labs.map((op, idx) => corOpcao(op, idx, labs.length));
+        const favSet = new Set(
+          (cfg.favIdx || [0])
+            .filter((i) => i < labs.length)
+            .map((i) => labs[i]),
+        );
         if (REV.includes(id)) {
           labs.reverse();
           cols.reverse();
         }
-        return { q, cnt, labs, cols, T: sum(cnt) };
+        return {
+          id,
+          enunciado: meta.enunciado || id,
+          secao: secaoDe(id),
+          cnt,
+          labs,
+          cols,
+          favSet,
+          T: sum(cnt),
+        };
       }
 
-      // Achado calculado do dado: "92% dizem que…" ou "3 de 4 dizem que…" se a base é pequena
+      // Achado calculado diretamente das alternativas marcadas na planilha
       function achado(c, id) {
         const qi = qinfo(c, id);
         if (!qi || !qi.T) return null;
-        const [fav, frase] = QT[id];
-        const v = sum(qi.labs.map((l, i) => (fav.includes(l) ? qi.cnt[i] : 0)));
-        const x = qi.T < SMALL_N ? `${v} de ${qi.T}` : `${Math.round((v / qi.T) * 100)}%`;
+        const favLabs = qi.labs.filter((l) => qi.favSet.has(l));
+        const v = sum(
+          qi.labs.map((l, i) => (qi.favSet.has(l) ? qi.cnt[i] : 0)),
+        );
+        const x =
+          qi.T < SMALL_N
+            ? `${v} de ${qi.T}`
+            : `${Math.round((v / qi.T) * 100)}%`;
+        const rotuloFav =
+          favLabs.length > 1
+            ? favLabs.slice(0, -1).join(", ") +
+              " ou " +
+              favLabs[favLabs.length - 1]
+            : favLabs[0] || "";
+        const frase = rotuloFav
+          ? `responderam "${rotuloFav}"`
+          : "nas opções favoráveis";
         return { x, frase, T: qi.T };
       }
 
@@ -931,7 +1326,8 @@
         return `<div class="seg" style="width:${p}%;background:${c};color:${tx(c)}" data-tip="${esc(L)} · ${v} resp. · ${p.toFixed(1).replace(".", ",")}%">${txt && p >= 6 ? Math.round(p) + "%" : ""}</div>`;
       };
       const chip = (m) => {
-        if (m == null) return `<div class="chip" style="color:var(--mu)">—</div>`;
+        if (m == null)
+          return `<div class="chip" style="color:var(--mu)">—</div>`;
         return `<div class="chip ${m < META ? "warn" : "ok"}">${f1(m)}</div>`;
       };
       const opt = (l, c, v, T) => {
@@ -1005,13 +1401,15 @@
 
       // ---------- desempenho dos discentes ----------
       const mediaTxt = (dp) =>
-        ((dp.estatisticas || []).find((s) => s.rotulo === "MÉDIA") || {}).valor ||
-        f2(dp.media_num);
+        ((dp.estatisticas || []).find((s) => s.rotulo === "MÉDIA") || {})
+          .valor || f2(dp.media_num);
 
       function tituloHist(dp, fallback) {
         const h = dp && dp.hist;
         if (!h || h.length < 2)
-          return dp ? "Sem histórico dos 3 últimos anos para comparar" : fallback;
+          return dp
+            ? "Sem histórico dos 3 últimos anos para comparar"
+            : fallback;
         const [pr, pv] = h[h.length - 2],
           av = h[h.length - 1][1];
         const d = Math.round((r2(av) - r2(pv)) * 100) / 100;
@@ -1044,9 +1442,18 @@
             `<div class="sec">${esc(sec)}</div><h2>${esc(titulo)}</h2><p class="sub">Desempenho dos discentes · ${M} discentes</p><table class="perf-table"><thead><tr><th>Indicador</th><th>Resultado</th></tr></thead><tbody>${linhas}</tbody></table>`,
           );
         } else if (notas[0] && notas[0].imagem) {
-          out.push(imgSlide(sec, notas[0].titulo || "Desempenho dos Discentes", "", notas[0].imagem));
+          out.push(
+            imgSlide(
+              sec,
+              notas[0].titulo || "Desempenho dos Discentes",
+              "",
+              notas[0].imagem,
+            ),
+          );
         } else if (DRAFT) {
-          out.push(`<div class="sec">${esc(sec)}</div><h2>Desempenho dos Discentes</h2>${ph("A preencher")}`);
+          out.push(
+            `<div class="sec">${esc(sec)}</div><h2>Desempenho dos Discentes</h2>${ph("A preencher")}`,
+          );
         }
 
         const n1 = notas[1] || NOTAS0[1],
@@ -1057,13 +1464,25 @@
               ? `${k} de ${M} alunos ficaram abaixo de ${f1(corte)}`
               : `Nenhum dos ${M} alunos ficou abaixo de ${f1(corte)}`
             : n1.titulo;
-          out.push(imgSlide(sec, t, dp ? "Frequência de notas da turma · médias finais" : "", n1.imagem));
+          out.push(
+            imgSlide(
+              sec,
+              t,
+              dp ? "Frequência de notas da turma · médias finais" : "",
+              n1.imagem,
+            ),
+          );
         } else if (DRAFT) {
           out.push(imgSlide(sec, n1.titulo, "", ""));
         }
         if (n2.imagem) {
           out.push(
-            imgSlide(sec, tituloHist(dp, n2.titulo), dp ? "Média da turma por período · últimos 3 anos" : "", n2.imagem),
+            imgSlide(
+              sec,
+              tituloHist(dp, n2.titulo),
+              dp ? "Média da turma por período · últimos 3 anos" : "",
+              n2.imagem,
+            ),
           );
         } else if (DRAFT) {
           out.push(imgSlide(sec, n2.titulo, "", ""));
@@ -1081,9 +1500,9 @@
           1500,
         );
         if (!PP.length)
-          return DRAFT
-            ? [`<div class="sec">Curso ${esc(sg)}</div><h2>Parecer da Coordenação Técnica</h2>${ph("A preencher")}`]
-            : [];
+          return [
+            `<div class="sec">Curso ${esc(sg)}</div><h2>Parecer da Coordenação Técnica</h2><p class="sub">Sem Parecer da Coordenação Técnica</p>`,
+          ];
         return PP.map(
           (p, i, A) =>
             `<div class="sec">Curso ${esc(sg)}${A.length > 1 ? " · " + (i + 1) + "/" + A.length : ""}</div><h2>Parecer da Coordenação Técnica</h2><ul class="ul2">${p.map((x) => `<li>${esc(x)}</li>`).join("")}</ul>`,
@@ -1099,7 +1518,8 @@
       };
       const stackRow = (r) =>
         `<div class="row"><div class="l">${esc(r.n)}</div>${bar(r.v, S10, SL, true)}${chip(r.m)}<div class="n${r.T < SMALL_N ? " wn" : ""}">${r.T ? "n=" + r.T : "—"}</div></div>`;
-      const byMean = (a, b) => (a.m == null) - (b.m == null) || (a.m ?? 0) - (b.m ?? 0);
+      const byMean = (a, b) =>
+        (a.m == null) - (b.m == null) || (a.m ?? 0) - (b.m ?? 0);
       const MAXR = 8; // itens mostrados no ranking do fluxo principal
       const PORPAG = 9; // itens por página no apêndice
 
@@ -1113,16 +1533,24 @@
           AP = [],
           todos = [];
 
-        // perguntas de múltipla escolha
-        for (const q of Q) {
-          const qi = qinfo(c, q[0]);
+        // perguntas de múltipla escolha (dinâmicas a partir da planilha)
+        const idsQ = Array.from(
+          new Set([
+            ...Q_ORDEM,
+            ...Object.keys(c.q || {}).filter((k) => k !== "4.2"),
+          ]),
+        );
+        for (const id of idsQ) {
+          const qi = qinfo(c, id);
           if (!qi) continue;
-          const { labs, cols, cnt, T } = qi;
-          const a = achado(c, q[0]);
-          const titulo = a ? `${a.x} ${a.frase}` : "Sem respostas para esta pergunta";
+          const { labs, cols, cnt, T, enunciado, secao } = qi;
+          const a = achado(c, id);
+          const titulo = a
+            ? `${a.x} ${a.frase}`
+            : "Sem respostas para esta pergunta";
           R.push([
-            (c.qo || {})[q[0]] || 0,
-            `<div class="sec">${esc(q[2])} · ${q[0]}</div><h2>${esc(titulo)}</h2><p class="sub">${esc(q[1])} · ${T < SMALL_N ? `<b class="wn">base pequena (n=${T})</b>` : `n=${T}`}</p><div class="big">${bar(cnt, cols, labs, false)}</div><div class="opts">${labs.map((l, i) => opt(l, cols[i], cnt[i], T)).join("")}</div>`,
+            (c.qo || {})[id] || 0,
+            `<div class="sec">${esc(secao)} · ${esc(id)}</div><h2>${esc(titulo)}</h2><p class="sub">${esc(enunciado)} · ${T < SMALL_N ? `<b class="wn">base pequena (n=${T})</b>` : `n=${T}`}</p><div class="big">${bar(cnt, cols, labs, false)}</div><div class="opts">${labs.map((l, i) => opt(l, cols[i], cnt[i], T)).join("")}</div>`,
           ]);
         }
 
@@ -1133,7 +1561,13 @@
           o += g[2];
           if (!items.length) continue;
           const rows = items
-            .map(([n, v]) => ({ n: nm(n), v, m: mean10(v), T: sum(v.slice(1)), g: g[0] }))
+            .map(([n, v]) => ({
+              n: nm(n),
+              v,
+              m: mean10(v),
+              T: sum(v.slice(1)),
+              g: g[0],
+            }))
             .sort(byMean);
           todos.push(...rows);
           const ord = (items[0] || [])[2] || 0;
@@ -1143,9 +1577,13 @@
           const mostradas = rows.slice(0, MAXR);
           const titulo = !com.length
             ? `${g[0]}: sem respostas`
-            : abaixo === 0
-              ? `Todos os ${com.length} itens têm média igual ou acima de ${f1(META)}`
-              : `${abaixo} de ${com.length} itens ${abaixo === 1 ? "tem" : "têm"} média abaixo de ${f1(META)}`;
+            : com.length === 1
+              ? abaixo === 0
+                ? `O item tem média igual ou acima de ${f1(META)}`
+                : `O item tem média abaixo de ${f1(META)}`
+              : abaixo === 0
+                ? `Todos os ${com.length} itens têm média igual ou acima de ${f1(META)}`
+                : `${abaixo} de ${com.length} itens ${abaixo === 1 ? "tem" : "têm"} média abaixo de ${f1(META)}`;
           const sub =
             `${g[1]} · escala de 1 a 10` +
             (pior ? ` · menor média: ${pior.n} (${f1(pior.m)})` : "") +
@@ -1157,7 +1595,8 @@
             `<div class="sec">${esc(g[0])}</div><h2>${esc(titulo)}</h2><p class="sub">${esc(sub)}</p><div class="rows"><div class="row rh"><div></div><div>MÉDIA · LINHA = ${f1(META)}</div><div></div><div>n (COM NOTA)</div></div>${mostradas.map(rankRow).join("")}</div>`,
           ]);
           const parts = [];
-          for (let i = 0; i < rows.length; i += PORPAG) parts.push(rows.slice(i, i + PORPAG));
+          for (let i = 0; i < rows.length; i += PORPAG)
+            parts.push(rows.slice(i, i + PORPAG));
           parts.forEach((p, i) =>
             AP.push(
               `<div class="sec">Apêndice · ${esc(g[0])}${parts.length > 1 ? " · " + (i + 1) + "/" + parts.length : ""}</div><h2>Distribuição das notas por item</h2><p class="sub">${esc(g[1])} · do menor para o maior valor médio · percentuais incluem "Não observado"</p><div class="rows">${p.map(stackRow).join("")}</div>${leg(S10, SL)}`,
@@ -1171,6 +1610,12 @@
         const att = {},
           X = [],
           APc = [];
+        const apcOf = (ti, l) =>
+          pagesOf(l, 1800).forEach((p, i, A) =>
+            APc.push(
+              `<div class="sec">Apêndice · Comentários${A.length > 1 ? " · " + (i + 1) + "/" + A.length : ""}</div><h2>${esc(ti)}</h2><div class="cm all"><ul>${p.map((x) => `<li>${esc(x)}</li>`).join("")}</ul></div>`,
+            ),
+          );
         const trunc = (s, n = 320) =>
           s.length > n ? s.slice(0, n).replace(/\s+\S*$/, "") + "…" : s;
         for (const [k2, [ti, l, od]] of Object.entries(c.c || {})) {
@@ -1188,23 +1633,19 @@
                 ? "O único comentário"
                 : l.length <= 3
                   ? `Todos os ${l.length} comentários`
-                  : `Os 3 mais detalhados de ${l.length} · íntegra no apêndice`;
+                  : `Mostrando 3 de ${l.length} · tecla C para ver todos`;
             X.push([
               od,
-              `<div class="sec">Comentários</div><h2>${l.length} ${l.length === 1 ? "comentário" : "comentários"} nesta pergunta</h2><p class="sub">${esc(ti)}</p><div class="qts">${top.map((x) => `<blockquote>${esc(trunc(x))}</blockquote>`).join("")}</div><div class="note">${esc(nota)}</div>`,
+              `<div class="sec">Comentários</div><h2>${l.length} ${l.length === 1 ? "comentário" : "comentários"} nesta pergunta</h2><p class="sub">${esc(ti)}</p><div class="qts">${top.map((x) => `<blockquote>${esc(trunc(x))}</blockquote>`).join("")}</div><div class="note">${esc(nota)}</div>${l.length > 3 || l.some((x) => x.length > 320) ? pan([[ti, l]]) : ""}`,
             ]);
-            if (l.length > 3 || l.some((x) => x.length > 320))
-              pagesOf(l, 1800).forEach((p, i, A) =>
-                APc.push(
-                  `<div class="sec">Apêndice · Comentários${A.length > 1 ? " · " + (i + 1) + "/" + A.length : ""}</div><h2>${esc(ti)}</h2><div class="cm all"><ul>${p.map((x) => `<li>${esc(x)}</li>`).join("")}</ul></div>`,
-                ),
-              );
+            if (l.length > 3 || l.some((x) => x.length > 320)) apcOf(ti, l);
           } else {
             let j = 0;
             R.forEach((r, n) => {
               if (r[0] <= od) j = n;
             });
             (att[j] = att[j] || []).push([ti, l]);
+            apcOf(ti, l);
           }
         }
         R.forEach((r, n) => X.push([r[0], r[1] + (att[n] ? pan(att[n]) : "")]));
@@ -1225,12 +1666,19 @@
           if (a) cards.push({ v: a.x, l: a.frase });
         }
         const pior = todos.filter((r) => r.m != null).sort(byMean)[0];
-        if (pior) cards.push({ v: f1(pior.m), l: `menor média: ${pior.n} (${pior.g})` });
+        if (pior)
+          cards.push({
+            v: f1(pior.m),
+            l: `menor média: ${pior.n} (${pior.g})`,
+          });
 
         const capa = isAll
           ? capaHTML({
               sec: "Pesquisa de satisfação · 2026",
-              titulo: k == "ALL_P" ? "Consolidado – Cursos presenciais" : "Consolidado – Cursos EAD",
+              titulo:
+                k == "ALL_P"
+                  ? "Consolidado – Cursos presenciais"
+                  : "Consolidado – Cursos EAD",
               l1: `${c.k} cursos · ${c.n} respostas`,
             })
           : capaHTML({
@@ -1253,9 +1701,13 @@
         secs.push({ t: "Pesquisa de satisfação", s: RH });
         if (!isAll) {
           const pa = parecerSlides(I, sg);
-          if (pa.length) secs.push({ t: "Parecer da Coordenação Técnica", s: pa });
+          if (pa.length)
+            secs.push({ t: "Parecer da Coordenação Técnica", s: pa });
         }
-        const nomes = secs.map((s) => s.t).concat(apendice.length ? ["Apêndice"] : []);
+        const nomes = secs
+          .map((s) => s.t)
+          .concat(isAll ? [] : ["Ações tomadas"])
+          .concat(apendice.length ? ["Apêndice"] : []);
         const divs = nomes.length >= 2;
 
         const out = [capa, agendaHTML(nomes)];
@@ -1265,10 +1717,12 @@
         });
         const acoes = isAll ? [] : I.acoes || [];
         out.push(stmtHTML(cards, acoes, !isAll && (acoes.length > 0 || DRAFT)));
+        if (!isAll) out.push(ataSlide(k, I));
         if (apendice.length) {
           if (divs) out.push(dividerHTML(nomes.length, "Apêndice"));
           out.push(...apendice);
         }
+        if (!isAll) out.push(capa); // fecha a apresentação do curso com a mesma capa de abertura
         return out;
       }
 
@@ -1276,10 +1730,129 @@
       let cur = "ALL_P",
         sl = [],
         ix = 0;
+      // ---------- ações tomadas (ata da reunião; salva neste navegador) ----------
+      const ataSlide = (k, I) =>
+        `<div class="sec">Ações tomadas</div><h2>Ações tomadas na reunião</h2><p class="sub">${esc(I.nome || k)} · preencha durante a reunião: ação, responsável e prazo · salvo automaticamente neste navegador</p><div class="ata" data-ata="${esc(k)}"></div>`;
+      const ATA_KEY = (k) => "ata-satisfacao:" + k;
+      const ataVazia = () => ({ acao: "", resp: "", prazo: "" });
+      function ataGet(k) {
+        let st = null;
+        try {
+          st = JSON.parse(localStorage.getItem(ATA_KEY(k)) || "null");
+        } catch (e) {
+          st = null;
+        }
+        if (!st || !Array.isArray(st.rows)) {
+          const pre = ((D[k] && D[k].i && D[k].i.acoes) || []).map((x) => ({
+            acao: String(x),
+            resp: "",
+            prazo: "",
+          }));
+          st = { data: "", rows: pre.length ? pre : [ataVazia()] };
+        }
+        return st;
+      }
+      function ataSave(k, st) {
+        try {
+          localStorage.setItem(ATA_KEY(k), JSON.stringify(st));
+        } catch (e) {}
+      }
+      const dataBR = (iso) => {
+        const [y, m, d] = String(iso).split("-");
+        return y && m && d ? `${d}/${m}/${y}` : "";
+      };
+      function renderAta() {
+        document.querySelectorAll("[data-ata]").forEach((box) => {
+          const k = box.dataset.ata,
+            st = ataGet(k);
+          const linhas = st.rows
+            .map(
+              (r, i) =>
+                `<tr><td>${i + 1}</td><td><div class="ata-ed" contenteditable="true" data-r="${i}" data-f="acao">${esc(r.acao)}</div></td><td><div class="ata-ed" contenteditable="true" data-r="${i}" data-f="resp">${esc(r.resp)}</div></td><td><input class="ata-date" type="date" data-r="${i}" data-f="prazo" value="${esc(r.prazo)}" aria-label="Prazo da ação ${i + 1}"></td><td class="no-print"><button type="button" data-rm="${i}" aria-label="Remover ação ${i + 1}">✕</button></td></tr>`,
+            )
+            .join("");
+          box.innerHTML =
+            `<div class="ata-bar no-print"><label>Data da reunião <input class="ata-date" type="date" data-f="data" value="${esc(st.data)}"></label>` +
+            `<button type="button" data-add>+ Adicionar ação</button><button type="button" data-csv>Exportar ata (CSV)</button><button type="button" data-clear>Limpar ata</button></div>` +
+            `<div class="ata-meta">Data da reunião: <span>${esc(dataBR(st.data) || "____/____/______")}</span></div>` +
+            `<table class="ata-t"><thead><tr><th>Nº</th><th>Ação</th><th>Responsável</th><th>Prazo</th><th class="no-print"></th></tr></thead><tbody>${linhas}</tbody></table>`;
+        });
+      }
+      document.addEventListener("input", (e) => {
+        const box = e.target.closest && e.target.closest("[data-ata]");
+        if (!box || !e.target.dataset.f) return;
+        const k = box.dataset.ata,
+          st = ataGet(k),
+          f = e.target.dataset.f;
+        if (f === "data") {
+          st.data = e.target.value;
+          const s = box.querySelector(".ata-meta span");
+          if (s) s.textContent = dataBR(st.data) || "____/____/______";
+        } else {
+          const r = st.rows[+e.target.dataset.r];
+          if (!r) return;
+          r[f] = f === "prazo" ? e.target.value : e.target.textContent.trim();
+        }
+        ataSave(k, st);
+      });
+      document.addEventListener("click", (e) => {
+        const box = e.target.closest && e.target.closest("[data-ata]");
+        if (!box) return;
+        const k = box.dataset.ata,
+          st = ataGet(k);
+        if (e.target.closest("[data-add]")) {
+          st.rows.push(ataVazia());
+        } else if (e.target.closest("[data-rm]")) {
+          st.rows.splice(+e.target.closest("[data-rm]").dataset.rm, 1);
+          if (!st.rows.length) st.rows.push(ataVazia());
+        } else if (e.target.closest("[data-clear]")) {
+          if (!confirm("Limpar todas as ações e a data desta ata?")) return;
+          st.rows = [ataVazia()];
+          st.data = "";
+        } else if (e.target.closest("[data-csv]")) {
+          ataCsv(k, st);
+          return;
+        } else return;
+        ataSave(k, st);
+        renderAta();
+      });
+      function ataCsv(k, st) {
+        const q = (v) => `"${String(v == null ? "" : v).replace(/"/g, '""')}"`;
+        const nome = (D[k] && D[k].i && D[k].i.nome) || k;
+        const data = dataBR(st.data);
+        const linhas = st.rows
+          .map((r, i) => [nome, data, i + 1, r.acao, r.resp, dataBR(r.prazo)])
+          .filter((x) => x[3] || x[4] || x[5])
+          .map((x) => x.map(q).join(";"));
+        const cab = [
+          "Curso",
+          "Data da reunião",
+          "Nº",
+          "Ação",
+          "Responsável",
+          "Prazo",
+        ]
+          .map(q)
+          .join(";");
+        const url = URL.createObjectURL(
+          new Blob(["\ufeff" + [cab, ...linhas].join("\r\n")], {
+            type: "text/csv;charset=utf-8",
+          }),
+        );
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = `ata_${k}.csv`;
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        setTimeout(() => URL.revokeObjectURL(url), 1000);
+      }
+
       function render() {
         const m = document.getElementById("m");
         m.className = isDark(sl[ix]) ? "dark" : "";
         m.innerHTML = `<div class="sl">${sl[ix]}</div>`;
+        renderAta();
         document.getElementById("pg").textContent = ix + 1 + " / " + sl.length;
       }
       function go(d) {
@@ -1291,11 +1864,20 @@
         sl = build(k);
         ix = 0;
         render();
-        // Impressão / PDF: uma página A4 paisagem por slide (montada já aqui, escondida na tela)
-        document.getElementById("pr").innerHTML = sl
-          .map((s) => `<section class="page${isDark(s) ? " dark" : ""}"><div class="sl">${s}</div></section>`)
-          .join("");
+        buildPrint();
       }
+
+      function buildPrint() {
+        // Impressão / PDF: uma página A4 paisagem por slide, com o estado atual da ata
+        document.getElementById("pr").innerHTML = sl
+          .map(
+            (s) =>
+              `<section class="page${isDark(s) ? " dark" : ""}"><div class="sl">${s}</div></section>`,
+          )
+          .join("");
+        renderAta();
+      }
+      window.addEventListener("beforeprint", buildPrint);
 
       const sel = document.getElementById("sel");
       const ent = (t) =>
@@ -1310,6 +1892,13 @@
       };
 
       document.addEventListener("keydown", (e) => {
+        if (
+          e.target.closest &&
+          e.target.closest("[contenteditable],input,textarea,select")
+        ) {
+          if (e.key == "Enter" && e.target.dataset.f) e.preventDefault();
+          return;
+        }
         if (e.key == "ArrowRight" || e.key == "PageDown" || e.key == " ") go(1);
         else if (e.key == "ArrowLeft" || e.key == "PageUp") go(-1);
         else if (e.key == "c" || e.key == "C") {

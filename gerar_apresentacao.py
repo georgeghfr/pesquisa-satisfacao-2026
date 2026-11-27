@@ -163,18 +163,51 @@ def limpar_periodo(p):
 # patentes) e validação do período.
 # ----------------------------------------------------------------------------
 MESES = {
-    "janeiro": 1, "fevereiro": 2, "março": 3, "marco": 3, "abril": 4,
-    "maio": 5, "junho": 6, "julho": 7, "agosto": 8, "setembro": 9,
-    "outubro": 10, "novembro": 11, "dezembro": 12,
+    "janeiro": 1,
+    "fevereiro": 2,
+    "março": 3,
+    "marco": 3,
+    "abril": 4,
+    "maio": 5,
+    "junho": 6,
+    "julho": 7,
+    "agosto": 8,
+    "setembro": 9,
+    "outubro": 10,
+    "novembro": 11,
+    "dezembro": 12,
 }
 TYPOS = [(re.compile(r"\bjuh+o\b", re.I), "julho")]
 
 PATENTES = {
-    "cap": "Cap", "maj": "Maj", "cel": "Cel", "ten": "Ten", "brig": "Brig",
-    "tc": "TC", "cp": "CP", "1t": "1T", "2t": "2T", "1s": "1S", "2s": "2S",
-    "3s": "3S", "sgt": "Sgt",
+    "cap": "Cap",
+    "maj": "Maj",
+    "cel": "Cel",
+    "ten": "Ten",
+    "brig": "Brig",
+    "tc": "TC",
+    "cp": "CP",
+    "1t": "1T",
+    "2t": "2T",
+    "1s": "1S",
+    "2s": "2S",
+    "3s": "3S",
+    "sgt": "Sgt",
 }
-QUADROS = {"AV", "INF", "MRM", "BCT", "QOINF", "QOENG", "QOCON", "QOEA", "QOAV", "INT", "ENG", "SAR"}
+QUADROS = {
+    "AV",
+    "INF",
+    "MRM",
+    "BCT",
+    "QOINF",
+    "QOENG",
+    "QOCON",
+    "QOEA",
+    "QOAV",
+    "INT",
+    "ENG",
+    "SAR",
+}
 PARTICULAS = {"de", "da", "do", "dos", "das", "e"}
 
 
@@ -239,6 +272,12 @@ def validar_periodo(chave: str, periodo: str):
     return None
 
 
+def limpar_enunciado(texto, chave):
+    t = re.sub(r"\s+", " ", str(texto or "")).strip()
+    t = re.sub(r"^" + re.escape(chave) + r"\.?\s*", "", t).strip()
+    return t
+
+
 def ler_folha(ws, nome):
     R = [tuple(r) + (None,) * 4 for r in ws.iter_rows(values_only=True)]
     if len(R) < 6:
@@ -256,23 +295,24 @@ def ler_folha(ws, nome):
         for i, r in enumerate(R)
         if i >= 5 and isinstance(r[0], (int, float)) and isinstance(r[1], str)
     ]
-    q, sc, cm, mult, qo = {}, [], {}, [], {}
+    q, qm, sc, cm, mult, qo = {}, {}, [], {}, [], {}
     for a, i in enumerate(qs):
         r, fim = R[i], (qs[a + 1] if a + 1 < len(qs) else len(R))
         nx = R[i + 1] if i + 1 < len(R) else (None,) * 6
         chave = r[1].split()[0].rstrip(".")
+        enunc = limpar_enunciado(r[1], chave)
         if r[2] is not None and nx[0] is None and isinstance(nx[2], (int, float)):
             ops = [x for x in r[2:] if x is not None]
+            ops_limpas = [re.sub(r"[\s.]+$", "", str(o)).strip() for o in ops]
             c = [float(x or 0) for x in nx[2 : 2 + len(ops)]]
             if ops[0] == "Não observado.":
                 sc.append([r[1], c, int(r[0])])
             else:
                 q[chave] = c
                 qo[chave] = int(r[0])
+                qm[chave] = {"enunciado": enunc, "opcoes": ops_limpas}
                 if chave == "4.2" and nq >= 50:
-                    mult = [
-                        [re.sub(r"[\s.]+$", "", str(o)), int(v)] for o, v in zip(ops, c)
-                    ]
+                    mult = [[o, int(v)] for o, v in zip(ops_limpas, c)]
         else:
             tx = [t for t in (limpo(row[2]) for row in R[i:fim]) if t]
             if tx:
@@ -293,7 +333,7 @@ def ler_folha(ws, nome):
             f"  [ERRO] {nome}: {len(sc)} itens de escala (esperado {ESPERADO[t]}). Curso ignorado."
         )
         return None
-    return {"t": t, "n": n, "q": q, "s": sc, "c": cm, "m": mult, "qo": qo}
+    return {"t": t, "n": n, "q": q, "qm": qm, "s": sc, "c": cm, "m": mult, "qo": qo}
 
 
 def localizar_arquivo_por_nomes(ent: Path, nomes_base: list[str]):
@@ -363,6 +403,7 @@ def ler_informacoes_xlsx(caminho: Path):
         edicao = norm_txt(get_col(r, "edicao", "versao"))
         periodo = limpar_periodo(get_col(r, "periodo", "local"))
         coord = norm_txt(get_col(r, "coordenador"))
+        parecer = norm_txt(get_col(r, "parecer"))
         sigla = chave.split("_")[0]
 
         dados[chave] = {
@@ -371,6 +412,7 @@ def ler_informacoes_xlsx(caminho: Path):
             "edicao": edicao,
             "periodo_local": periodo,
             "coordenacao": {"Coordenação Técnica": coord},
+            "parecer": parecer,
         }
     return dados
 
@@ -385,7 +427,9 @@ _FONTE_SVG = "'Segoe UI', Roboto, Arial, sans-serif"
 
 def _fig_para_uri(fig) -> str:
     buf = io.BytesIO()
-    fig.savefig(buf, format="svg", bbox_inches="tight", pad_inches=0.15, transparent=True)
+    fig.savefig(
+        buf, format="svg", bbox_inches="tight", pad_inches=0.15, transparent=True
+    )
     plt.close(fig)
     svg = buf.getvalue().decode("utf-8")
     # O SVG fica dentro de <img>: sem fonte de reserva o navegador cairia em serifa.
@@ -450,14 +494,24 @@ def _grafico_frequencia_uri(notas: list[float], titulo_curso: str) -> str:
             b.get_x() + b.get_width() / 2,
             b.get_height() + max_c * 0.03,
             str(int(c)),
-            ha="center", va="bottom", fontsize=18, fontweight="bold", color=_TX,
+            ha="center",
+            va="bottom",
+            fontsize=18,
+            fontweight="bold",
+            color=_TX,
         )
     if x7 is not None:
         ax.axvline(x7, color=_AC, linestyle=(0, (2, 3)), linewidth=2, zorder=4)
     ax.axvline(x_media, color=_TX, linestyle=(0, (4, 4)), linewidth=1.4, zorder=4)
     ax.text(
-        x_media, max_c * 1.27, f"Média {fmt_pt(media, 2)}",
-        ha="center", va="bottom", fontsize=14, fontweight="bold", color="#FFFFFF",
+        x_media,
+        max_c * 1.27,
+        f"Média {fmt_pt(media, 2)}",
+        ha="center",
+        va="bottom",
+        fontsize=14,
+        fontweight="bold",
+        color="#FFFFFF",
         bbox=dict(boxstyle="round,pad=0.35", fc=_NAVY, ec="none"),
     )
     rotulo = f"Intervalo de notas · {n_alunos} alunos"
@@ -513,7 +567,9 @@ def _grafico_historico_uri(serie: list[tuple[str, float]]) -> str:
     ax.set_axisbelow(True)
     ax.set_xlabel(
         "Média da turma por período (o eixo não começa em zero)",
-        fontsize=13, color=_MU, labelpad=12,
+        fontsize=13,
+        color=_MU,
+        labelpad=12,
     )
 
     for xi, v in zip(x, valores):
@@ -521,21 +577,34 @@ def _grafico_historico_uri(serie: list[tuple[str, float]]) -> str:
             xi,
             v + (y_max - y_min) * 0.06,
             fmt_pt(v, 2),
-            ha="center", va="bottom", fontsize=20, fontweight="bold", color=_TX,
+            ha="center",
+            va="bottom",
+            fontsize=20,
+            fontweight="bold",
+            color=_TX,
         )
     if len(valores) > 1:  # variação em relação ao período anterior
         # mesma conta do título do slide: diferença entre os valores já arredondados
         d = round(round(valores[-1], 2) - round(valores[-2], 2), 2)
         sinal = "+" if d >= 0 else "−"
         if abs(d) < DELTA_MIN:
-            texto, cor = f"≈ estável ({sinal}{fmt_pt(abs(d), 2)} vs. {rotulos[-2]})", _MU
+            texto, cor = (
+                f"≈ estável ({sinal}{fmt_pt(abs(d), 2)} vs. {rotulos[-2]})",
+                _MU,
+            )
         else:
             seta = "▲" if d >= 0 else "▼"
             texto = f"{seta} {sinal}{fmt_pt(abs(d), 2)} vs. {rotulos[-2]}"
             cor = _UP if d >= 0 else _DOWN
         ax.text(
-            x[-1], valores[-1] + (y_max - y_min) * 0.17, texto,
-            ha="center", va="bottom", fontsize=14, fontweight="bold", color=cor,
+            x[-1],
+            valores[-1] + (y_max - y_min) * 0.17,
+            texto,
+            ha="center",
+            va="bottom",
+            fontsize=14,
+            fontweight="bold",
+            color=cor,
         )
     return _fig_para_uri(fig)
 
@@ -573,7 +642,11 @@ def ler_aba_desempenho(ws, chave_curso: str, edicao_txt: str, nome_curso: str):
                 str(ano_int) if math.isclose(ano_val, ano_int) else norm_txt(r[2])
             )
             historico_raw.append(
-                (ano_int if math.isclose(ano_val, ano_int) else None, rotulo_ano, media_hist)
+                (
+                    ano_int if math.isclose(ano_val, ano_int) else None,
+                    rotulo_ano,
+                    media_hist,
+                )
             )
 
     if not notas:
@@ -669,6 +742,7 @@ def mesclar_info(base_json: dict, planilha_item: dict, tipo: str = "P"):
             val = norm_txt(planilha_item.get(campo))
             if val:
                 item[campo] = val
+        item["parecer"] = norm_txt(planilha_item.get("parecer"))
         coord_plan = norm_txt(
             (planilha_item.get("coordenacao") or {}).get("Coordenação Técnica")
         )
